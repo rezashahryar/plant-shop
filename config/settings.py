@@ -130,5 +130,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# config custom user model
+AUTH_USER_MODEL = 'accounts.User'
+
 #choose home page
 HOME_PAGE = 'home3'  # values: home1, home2, home3
