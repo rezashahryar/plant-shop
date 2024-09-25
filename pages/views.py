@@ -1,4 +1,4 @@
-from django.template.exceptions import TemplateDoesNotExist
+from django.shortcuts import render
 from django.views import generic
 from django.conf import settings
 # Create your views here.
@@ -11,3 +11,6 @@ class HomePageView(generic.TemplateView):
             return [f'pages/{settings.HOME_PAGE}.html']
         return ['pages/home1.html']
     
+
+def about_view(request):
+    return render(request, 'pages/about.html')
