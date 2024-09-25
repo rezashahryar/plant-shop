@@ -27,6 +27,6 @@ class ContactUsView(generic.FormView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, 'پیغام شما با موفقیت ارسال شد. از همکاری شما سپاسگزاریم')
+        messages.success(self.request, '.پیغام شما با موفقیت ارسال شد. از همکاری شما سپاسگزاریم')
         return super().form_valid(form)
     
