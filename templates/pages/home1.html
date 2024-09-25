@@ -108,11 +108,16 @@
 										</ul>
 									</li>
 									<li class="nav-item">
-										<a class="d-block" href="contact-us.html">contact</a>
+										<a class="d-block" href="{% url "pages:contact-us" %}">contact</a>
 									</li>
 								</ul>
 							</div>
 						</nav>
+						{% if messages %}
+						{% for message in messages %}
+							<p style="margin: 10px 0; text-align:center;" class="alert alert-success">{{ message }}</p>
+						{% endfor %}
+						{% endif %}
 						<div class="logo">
 							<a href="home.html"><img src="{% static "images/logo.png" %}" alt="Botanical" class="img-fluid"></a>
 						</div>
