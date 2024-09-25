@@ -134,4 +134,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 #choose home page
-HOME_PAGE = 'home3'  # values: home1, home2, home3
+HOME_PAGE = 'home1'  # values: home1, home2, home3
