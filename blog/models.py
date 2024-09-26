@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 
 # Create your models here.
 
@@ -18,3 +19,6 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return f'{self.author} : {self.title}'
+    
+    def get_absolute_url(self):
+        return reverse('blog:post_detail', args=[self.slug])
