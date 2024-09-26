@@ -6,7 +6,7 @@ from .models import Post
 
 
 class PostListView(generic.ListView):
-    queryset = Post.objects.filter(published_status=True)
+    queryset = Post.objects.select_related('author').filter(published_status=True)
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
 
@@ -17,4 +17,4 @@ class PostDetailView(generic.DetailView):
 
     def get_object(self):
         slug = self.kwargs['slug']
-        return Post.objects.get(slug=slug)
+        return Post.objects.select_related('author').get(slug=slug)
