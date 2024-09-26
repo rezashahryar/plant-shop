@@ -23,6 +23,8 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('post/', include('blog.urls')),
+    path('auth/', include('django.contrib.auth.urls')),
+    path('auth/', include('accounts.urls')),
     path('', include('pages.urls')),
     # third party pack
     path('summernote/', include('django_summernote.urls')),

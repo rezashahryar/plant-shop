@@ -35,12 +35,23 @@
 					<!-- langList -->
 					<ul class="nav nav-tabs langList pt-xl-6 pt-lg-4 pt-3 border-bottom-0">
 						<li>
-							<a class="icon-menu" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false"></a>
-							<div class="dropdown-menu pl-4 pr-4">
-								<a class="dropdown-item" href="javascript:void(0);">Login</a>
-								<a class="dropdown-item" href="javascript:void(0);">Registration</a>
-								<a class="dropdown-item" href="javascript:void(0);">Logout</a>
-							</div>
+							{% if user.is_authenticated %}
+								<a data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
+									hi <b style="margin-left:3px;">{{ user.username }}</b>
+								</a>
+								<div class="dropdown-menu pl-4 pr-4">
+									<form action="{% url "logout" %}" method="POST">
+										{% csrf_token %}
+										<button class="dropdown-item" href="javascript:void(0);">Logout</a>
+									</form>
+								</div>
+							{% else %}
+								<a class="icon-menu" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false"></a>
+								<div class="dropdown-menu pl-4 pr-4">
+									<a href="{% url "login" %}" class="dropdown-item" href="javascript:void(0);">Login</a>
+									<a href="#" class="dropdown-item" href="javascript:void(0);">Registration</a>
+								</div>
+							{% endif %}
 						</li>
 						<li class="dropdown">
 							<a class="dropdown-toggle text-uppercase" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">ENG</a>
@@ -699,7 +710,7 @@
 			</div>
 			<div class="container-fluid px-xl-20 px-lg-14">
 				<!-- subscribeSecBlock -->
-				<section class="subscribeSecBlock bgCover col-12 pt-xl-24 pb-xl-12 pt-lg-20 pt-md-16 pt-10 pb-md-8 pb-5" style="background-image: url(http://placehold.it/1720x465)">
+				<section class="subscribeSecBlock bgCover col-12 pt-xl-24 pb-xl-12 pt-lg-20 pt-md-16 pt-10 pb-md-8 pb-5" style="background-image: url({% static "images/n-bg.jpg" %})">
 					<header class="col-12 mainHeader mb-sm-9 mb-6 text-center">
 						<h1 class="headingIV playfair fwEblod mb-4">Subscribe Our Newsletter</h1>
 						<span class="headerBorder d-block mb-md-5 mb-3"><img src="images/hbdr.png" alt="Header Border" class="img-fluid img-bdr"></span>
