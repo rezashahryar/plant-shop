@@ -72,7 +72,7 @@
 					<div class="col-6 col-sm-2">
 						<!-- mainLogo -->
 						<div class="logo">
-							<a href="home.html"><img src="images/logo.png" alt="Botanical" class="img-fluid"></a>
+							<a href="{% url "pages:home" %}"><img src="{% static "images/logo.png" %}" alt="Botanical" class="img-fluid"></a>
 						</div>
 					</div>
 					<div class="col-6 col-sm-7 col-lg-8 static-block">
@@ -89,12 +89,12 @@
 								<div class="collapse navbar-collapse" id="navbarNav">
 									<ul class="navbar-nav mx-auto text-uppercase d-inline-block">
 										<li class="nav-item dropdown">
-											<a class="dropdown-toggle d-block" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">home</a>
-											<ul class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
+											<a href="{% url "pages:home" %}" class="dropdown-toggle d-block" aria-haspopup="true" aria-expanded="false">home</a>
+											{% comment %} <ul class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
 												<li class="d-block mx-0"><a href="home.html">Home 1</a></li>
 												<li class="d-block mx-0"><a href="home2.html">Home 2</a></li>
 												<li class="d-block mx-0"><a href="home3.html">Home 3</a></li>
-											</ul>
+											</ul> {% endcomment %}
 										</li>
 										<li class="nav-item dropdown">
 											<a class="dropdown-toggle d-block" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Store</a>
@@ -104,23 +104,23 @@
 											</ul>
 										</li>
 										<li class="nav-item">
-											<a class="d-block" href="about-us.html">About</a>
+											<a class="d-block" href="{% url "pages:about" %}">About</a>
 										</li>
 										<li class="nav-item active dropdown">
-											<a class="dropdown-toggle d-block" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
-											<ul class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
+											<a href="{% url "blog:post_list" %}" class="dropdown-toggle d-block" aria-haspopup="true" aria-expanded="false">Blog</a>
+											{% comment %} <ul class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
 												<li class="d-block mx-0"><a href="blog.html">Blog Left Sidebar</a></li>
 												<li class="d-block mx-0"><a href="blog-detail.html">Blog Detail</a></li>
-											</ul>
+											</ul> {% endcomment %}
 										</li>
 										<li class="nav-item dropdown">
-											<a class="dropdown-toggle d-block" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-											<ul class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
+											<a href="#" class="dropdown-toggle d-block" aria-haspopup="true" aria-expanded="false">Cart</a>
+											{% comment %} <ul class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
 												<li class="d-block mx-0"><a href="cart-page.html">Cart Page</a></li>
-											</ul>
+											</ul> {% endcomment %}
 										</li>
 										<li class="nav-item">
-											<a class="d-block" href="contact-us.html">contact</a>
+											<a class="d-block" href="{% url "pages:contact-us" %}">contact</a>
 										</li>
 									</ul>
 								</div>

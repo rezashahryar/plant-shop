@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # third party pack
     'django_summernote',
+    'debug_toolbar',
 
     # local apps
     'pages.apps.PagesConfig',
@@ -60,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # django debug toolbar
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -145,3 +148,8 @@ AUTH_USER_MODEL = 'accounts.User'
 
 #choose home page
 HOME_PAGE = 'home1'  # values: home1, home2, home3
+
+# django debug toolbar
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
