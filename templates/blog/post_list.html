@@ -1,4 +1,5 @@
 {% load static %}
+{% load blog_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -198,11 +199,9 @@
 							<section class="widget overflow-hidden mb-md-9 mb-6">
 								<h3 class="headingVII fwEbold text-uppercase mb-2">RECENT POSTS</h3>
 								<ul class="list-unstyled recentPostList mb-0">
-									<li><a href="javascript:void(0);" class="py-2 d-block">Blog image post</a></li>
-									<li><a href="javascript:void(0);" class="py-2 d-block">Post with Gallery</a></li>
-									<li><a href="javascript:void(0);" class="py-2 d-block">Post with Audio</a></li>
-									<li><a href="javascript:void(0);" class="py-2 d-block">Post with Video</a></li>
-									<li><a href="javascript:void(0);" class="py-2 d-block">Maecenas ultricies</a></li>
+									{% for post in posts|slice:":4" %}
+									<li><a href="javascript:void(0);" class="py-2 d-block">{{ post.title }}</a></li>
+									{% endfor %}
 								</ul>
 							</section>
 							<!-- widget -->

@@ -1,0 +1,8 @@
+<section class="widget overflow-hidden mb-md-9 mb-6">
+    <h3 class="headingVII fwEbold text-uppercase mb-2">RECENT POSTS</h3>
+    <ul class="list-unstyled recentPostList mb-0">
+        {% for post in posts %}
+        <li><a href="javascript:void(0);" class="py-2 d-block">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+</section>
