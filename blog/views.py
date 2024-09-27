@@ -1,9 +1,10 @@
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Prefetch
 
 from blog.forms import PostCommentForm
 
-from .models import Post
+from .models import Comment, Post
 # Create your views here.
 
 
@@ -19,7 +20,13 @@ class PostDetailView(generic.DetailView):
 
     def get_object(self):
         slug = self.kwargs['slug']
-        return Post.objects.select_related('author').get(slug=slug)
+        return Post.objects.select_related('author') \
+            .prefetch_related(
+                Prefetch(
+                    'comments',
+                    queryset=Comment.objects.select_related('user')
+                )
+            ).get(slug=slug)
     
 
 class CommentCreateView(LoginRequiredMixin, generic.FormView):

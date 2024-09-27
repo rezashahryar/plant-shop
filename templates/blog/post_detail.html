@@ -263,17 +263,19 @@
 					<div class="col-12 border-bottom">
 						<!-- commentsBlock -->
 						<div class="commentsBlock overflow-hidden mb-2">
-							<h4 class="headingVII text-uppercase mb-5">3 COMMENTS</h4>
+							<h4 class="headingVII text-uppercase mb-5">{{ post.comments.all.count }} COMMENTS</h4>
 							<!-- commentArea -->
+							{% for comment in post.comments.all %}
 							<article class="commentArea overflow-hidden d-flex align-items-start mb-6">
-								<a href="javascript:void(0);" class="img rounded pr-5"><img src="http://placehold.it/70x70" alt="image description" class="img-fluid"></a>
+								<a href="javascript:void(0);" class="img rounded pr-5"><img src="{% static "images/avatar3.png" %}" alt="image description" class="img-fluid"></a>
 								<div class="txtHolder border px-2 py-2">
-									<span class="commentDate d-block mb-2"><a href="javascript:void(0);">Admin</a> Post authorOctober 6, 2014 at 1:38 am	<a href="javascript:void(0);" class="link text-green">Reply</a></span>
-									<p class="mb-1">just a nice post</p>
+									<span class="commentDate d-block mb-2"><a href="javascript:void(0);">{{ comment.user.username }}</a> {{ comment.datetime_created }} <a href="javascript:void(0);" class="link text-green">Reply</a></span>
+									<p class="mb-1">{{ comment.text }}</p>
 								</div>
 							</article>
+							{% endfor %}
 							<!-- comment one level of the page -->
-							<div class="commentOneLevel pl-md-20 pl-sm-10 pl-0 mb-9">
+							{% comment %} <div class="commentOneLevel pl-md-20 pl-sm-10 pl-0 mb-9">
 								<article class="commentArea overflow-hidden d-flex align-items-start mb-2">
 									<a href="javascript:void(0);" class="img rounded pr-5"><img src="http://placehold.it/70x70" alt="image description" class="img-fluid"></a>
 									<div class="txtHolder border px-2 py-2">
@@ -281,15 +283,8 @@
 										<p class="mb-1">Quisque semper nunc vitae erat pellentesque, ac placerat arcu consectetur</p>
 									</div>
 								</article>
-							</div>
+							</div> {% endcomment %}
 							<!-- comment area of the page -->
-							<article class="commentArea overflow-hidden d-flex align-items-start mb-6">
-								<a href="javascript:void(0);" class="img rounded pr-5"><img src="http://placehold.it/70x70" alt="image description" class="img-fluid"></a>
-								<div class="txtHolder border px-2 py-2">
-									<span class="commentDate d-block mb-2"><a href="javascript:void(0);">Admin</a> Post authorOctober 6, 2014 at 1:38 am	<a href="javascript:void(0);" class="link text-green">Reply</a></span>
-									<p class="mb-1">Quisque orci nibh, porta vitae sagittis sit amet, vehicula vel mauris. Aenean at justo dolor. Fusce ac sapien bibendum, scelerisque libero nec Quisque orci nibh, porta vitae sagittis sit amet, vehicula vel mauris. Aenean at justo dolor. Fusce ac sapien bibendum, scelerisque libero nec</p>
-								</div>
-							</article>
 						</div>
 					</div>
 				</div>
