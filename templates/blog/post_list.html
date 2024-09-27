@@ -147,7 +147,7 @@
 						<div class="col-12 pt-lg-23 pt-md-15 pt-sm-10 pt-6 text-center">
 							<h1 class="headingIV fwEbold playfair mb-4">Blog</h1>
 							<ul class="list-unstyled breadCrumbs d-flex justify-content-center">
-								<li class="mr-2"><a href="home.html">Home</a></li>
+								<li class="mr-2"><a href="{% url "pages:home" %}">Home</a></li>
 								<li class="mr-2">/</li>
 								<li class="active">Blog</li>
 							</ul>
@@ -165,7 +165,7 @@
 							 {% for post in posts %}
 							 <div class="newsBlogColumn mb-md-9 mb-6">
 								 <div class="imgHolder position-relative mb-6">
-									 <a href="blog-detail.html">
+									 <a href="{{ post.get_absolute_url }}">
 										 <img src="{{ post.cover.url }}" alt="image description" class="img-fluid">
 									 </a>
 								 </div>
