@@ -81,8 +81,7 @@
                     <div class="col-6 col-sm-2">
                         <!-- mainLogo -->
                         <div class="logo">
-                            <a href="{% url "pages:home" %}"><img src="{% static "images/logo.png" %}" alt="Botanical"
-                                    class="img-fluid"></a>
+                            <a href="{% url "pages:home" %}"><img src="{% static "images/logo.png" %}" alt="Botanical" class="img-fluid"></a>
                         </div>
                     </div>
                     <div class="col-6 col-sm-7 col-lg-8 static-block">
@@ -118,10 +117,12 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li class="nav-item">
+                                        {% url "pages:about" as about %}
+                                        <li class="nav-item {% if request.path == about %}active{% endif %}">
                                             <a class="d-block" href="{% url "pages:about" %}">About</a>
                                         </li>
-                                        <li class="nav-item active dropdown">
+                                        {% url "blog:post_list" as blog %}
+                                        <li class="nav-item dropdown {% if request.path == blog %}active{% endif %}">
                                             <a href="{% url "blog:post_list" %}" class="dropdown-toggle d-block"
                                                 aria-haspopup="true" aria-expanded="false">Blog</a>
                                             {% comment %} <ul
@@ -138,7 +139,8 @@
                                                 <li class="d-block mx-0"><a href="cart-page.html">Cart Page</a></li>
                                             </ul> {% endcomment %}
                                         </li>
-                                        <li class="nav-item">
+                                        {% url "pages:contact-us" as contact %}
+                                        <li class="nav-item {% if request.path == contact %}active{% endif %}">
                                             <a class="d-block" href="{% url "pages:contact-us" %}">contact</a>
                                         </li>
                                     </ul>
