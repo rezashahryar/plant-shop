@@ -53,7 +53,7 @@
                                  <div class="col-12 col-sm-6 col-lg-4 featureCol mb-7">
                                      <div class="border">
                                          <div class="imgHolder position-relative w-100 overflow-hidden">
-                                             <img src="{{ product.image.url }}" alt="image description" class="img-fluid w-100">
+                                             <img src="{{ product.cover.url }}" alt="image description" class="img-fluid w-100">
                                              <ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
                                                  <li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-heart d-block"></a></li>
                                                  <li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-cart d-block"></a></li>
@@ -62,7 +62,7 @@
                                              </ul>
                                          </div>
                                          <div class="text-center py-5 px-4">
-                                             <span class="title d-block mb-2"><a href="shop-detail.html">{{ product.title }}</a></span>
+                                             <span class="title d-block mb-2"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></span>
                                              <span class="price d-block fwEbold">
                                                 {% if product.discount %}
                                                     <del>{{ product.unit_price }} $</del>
