@@ -4,6 +4,8 @@ from django.conf import settings
 from django.urls import reverse_lazy
 from django.contrib import messages
 
+from products.models import Product
+
 from .forms import ContactUsForm
 # Create your views here.
 
@@ -14,6 +16,12 @@ class HomePageView(generic.TemplateView):
         if settings.HOME_PAGE in ['home1', 'home2', 'home3']:
             return [f'pages/{settings.HOME_PAGE}.html']
         return ['pages/home1.html']
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = Product.objects.all()[:10]
+
+        return context
     
 
 def about_view(request):
