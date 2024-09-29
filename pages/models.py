@@ -10,5 +10,9 @@ class ContactUs(models.Model):
     phone_num = models.CharField(max_length=11, validators=[validate_integer])
     message = models.TextField()
 
+    class Meta:
+        verbose_name = 'contact us'
+        verbose_name_plural = 'contacts us'
+
     def __str__(self) -> str:
         return f'{self.name} : {self.phone_num}'
