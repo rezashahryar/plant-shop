@@ -132,51 +132,17 @@
 							<section class="widget mb-9">
 								<h3 class="headingVII fwEbold text-uppercase mb-6">top rate</h3>
 								<ul class="list-unstyled recentListHolder mb-0 overflow-hidden">
-									<li class="mb-6 d-flex flex-nowrap">
-										<div class="alignleft">
-											<a href="shop-detail.html"><img src="http://placehold.it/70x80" alt="image description" class="img-fluid"></a>
-										</div>
-										<div class="description-wrap pl-1">
-											<h4 class="headingVII mb-1"><a href="shop-detail.html">Vitamin C face wash</a></h4>
-											<strong class="price fwEbold d-block;">21.00 $</strong>
-										</div>
-									</li>
-									<li class="mb-6 d-flex flex-nowrap">
-										<div class="alignleft">
-											<a href="shop-detail.html"><img src="http://placehold.it/70x80" alt="image description" class="img-fluid"></a>
-										</div>
-										<div class="description-wrap pl-1">
-											<h4 class="headingVII mb-1"><a href="shop-detail.html">Organic vegetables</a></h4>
-											<strong class="price fwEbold d-block;">21.00 $</strong>
-										</div>
-									</li>
-									<li class="mb-6 d-flex flex-nowrap">
-										<div class="alignleft">
-											<a href="shop-detail.html"><img src="http://placehold.it/70x80" alt="image description" class="img-fluid"></a>
-										</div>
-										<div class="description-wrap pl-1">
-											<h4 class="headingVII mb-1"><a href="shop-detail.html">Organic cabbage</a></h4>
-											<strong class="price fwEbold d-block;">21.00 $</strong>
-										</div>
-									</li>
-									<li class="mb-6 d-flex flex-nowrap">
-										<div class="alignleft">
-											<a href="shop-detail.html"><img src="http://placehold.it/70x80" alt="image description" class="img-fluid"></a>
-										</div>
-										<div class="description-wrap pl-1">
-											<h4 class="headingVII mb-1"><a href="shop-detail.html">Organic vegetables</a></h4>
-											<strong class="price fwEbold d-block;">21.00 $</strong>
-										</div>
-									</li>
-									<li class="d-flex flex-nowrap">
-										<div class="alignleft">
-											<a href="shop-detail.html"><img src="http://placehold.it/70x80" alt="image description" class="img-fluid"></a>
-										</div>
-										<div class="description-wrap pl-1">
-											<h4 class="headingVII mb-1"><a href="shop-detail.html">Vitamin C face wash</a></h4>
-											<strong class="price fwEbold d-block;">21.00 $</strong>
-										</div>
-									</li>
+									{% for product in products|slice:":5" %}
+										<li class="mb-6 d-flex flex-nowrap">
+											<div class="alignleft">
+												<a href="{{ product.get_absolute_url }}"><img style="height:80px;" width="70px" src="{{ product.cover.url }}" alt="image description" class="img-fluid"></a>
+											</div>
+											<div class="description-wrap pl-1">
+												<h4 class="headingVII mb-1"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>
+												<strong class="price fwEbold d-block;">{{ product.price }} $</strong>
+											</div>
+										</li>
+									{% endfor %}
 								</ul>
 							</section>
 							<!-- widget -->
