@@ -108,14 +108,14 @@
                                                 <li class="d-block mx-0"><a href="home3.html">Home 3</a></li>
                                             </ul> {% endcomment %}
                                         </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="dropdown-toggle d-block" role="button" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">Store</a>
-                                            <ul class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
+                                        {% url "products:product_list" as store %}
+                                        <li class="nav-item dropdown {% if request.path == store %}active{% endif %}">
+                                            <a href="{% url "products:product_list" %}" class="dropdown-toggle d-block">Store</a>
+                                            {% comment %} <ul class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
                                                 <li class="d-block mx-0"><a href="shop.html">Shop Left Sidebar</a></li>
                                                 <li class="d-block mx-0"><a href="shop-detail.html">Single Product</a>
                                                 </li>
-                                            </ul>
+                                            </ul> {% endcomment %}
                                         </li>
                                         {% url "pages:about" as about %}
                                         <li class="nav-item {% if request.path == about %}active{% endif %}">
