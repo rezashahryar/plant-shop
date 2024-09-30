@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'blog.apps.BlogConfig',
     'products.apps.ProductsConfig',
+    'shop.apps.ShopConfig',
 ]
 
 MIDDLEWARE = [
