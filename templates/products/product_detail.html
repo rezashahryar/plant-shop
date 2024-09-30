@@ -59,47 +59,22 @@
 							</ul>
 							<ul class="list-unstyled sizeList d-flex flex-wrap mb-4">
 								<li class="text-uppercase mr-6">Size:</li>
-								<li class="mr-2">
-									<label for="check-1">
-										<input id="check-1" checked="checked" type="checkbox">
-										<span class="fake-input"></span>
-										<span class="fake-label">L</span>
-									</label>
-								</li>
-								<li class="mr-2">
-									<label for="check-2">
-										<input id="check-2" type="checkbox">
-										<span class="fake-input"></span>
-										<span class="fake-label">M</span>
-									</label>
-								</li>
-								<li class="mr-2">
-									<label for="check-3">
-										<input id="check-3" type="checkbox">
-										<span class="fake-input"></span>
-										<span class="fake-label">S</span>
-									</label>
-								</li>
-								<li class="mr-2">
-									<label for="check-4">
-										<input id="check-4" type="checkbox">
-										<span class="fake-input"></span>
-										<span class="fake-label">XL</span>
-									</label>
-								</li>
-								<li class="mr-2">
-									<label for="check-5">
-										<input id="check-5" type="checkbox">
-										<span class="fake-input"></span>
-										<span class="fake-label">XXL</span>
-									</label>
-								</li>
+								{% for size in product.sizes.all %}
+									<li class="mr-2">
+										<label for="check-1">
+											<input id="check-1" type="checkbox">
+											<span class="fake-input"></span>
+											<span class="fake-label">{{ size.name }}</span>
+										</label>
+									</li>
+								{% endfor %}
 							</ul>
 							<ul class="list-unstyled colorList d-flex flex-wrap mb-8">
 								<li class="text-uppercase mr-2">Color:</li>
-								<li class="mr-3"><a href="javascript:void(0);" class="red rounded"></a></li>
-								<li class="mr-3"><a href="javascript:void(0);" class="yellow rounded"></a></li>
-								<li class="mr-3"><a href="javascript:void(0);" class="purple rounded"></a></li>
+								{% for color in product.colors.all %}
+									<li class="mr-3"><a href="javascript:void(0);" class="red rounded"></a></li>
+									<li class="mr-3"><a href="javascript:void(0);" class="red rounded"></a></li>
+								{% endfor %}
 							</ul>
 							<div class="holder overflow-hidden d-flex flex-wrap mb-6">
 								<input type="number" placeholder="1">

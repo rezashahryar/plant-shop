@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, ProductImage
+from .models import Product, ProductImage, Size, Color
 
 # Register your models here.
 
@@ -12,4 +12,14 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):
+    ...
+
+
+@admin.register(Color)
+class ColorAdmin(admin.ModelAdmin):
+    ...
+
+
+@admin.register(Size)
+class SizeAdmin(admin.ModelAdmin):
     ...
