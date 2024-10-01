@@ -4,7 +4,7 @@ from django.db.models import Prefetch
 
 from blog.forms import PostCommentForm
 
-from .models import Comment, Post
+from .models import CategoryPost, Comment, Post
 # Create your views here.
 
 
@@ -12,6 +12,12 @@ class PostListView(generic.ListView):
     queryset = Post.objects.select_related('author').filter(published_status=True)
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = CategoryPost.objects.all()
+
+        return context
 
 
 class PostDetailView(generic.DetailView):
@@ -48,3 +54,18 @@ class CommentCreateView(LoginRequiredMixin, generic.FormView):
     def get_success_url(self) -> str:
         post_pk = self.kwargs['post_pk']
         return Post.objects.get(pk=post_pk).get_absolute_url()
+    
+
+class FilterPostsByCategory(generic.ListView):
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        return Post.objects.filter(category__slug=slug)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = CategoryPost.objects.all()
+
+        return context

@@ -368,7 +368,7 @@
 										</ul>
 									</div>
 									<div class="text-center py-5 px-2">
-										<span class="title d-block mb-2"><a href="shop-detail.html">{{ product.title }}</a></span>
+										<span class="title d-block mb-2"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></span>
 										<span class="price d-block fwEbold">
 											{% if product.discount %}
 												<del>{{ product.unit_price }} $</del>
@@ -433,17 +433,7 @@
 			</div>
 			<div class="container-fluid px-xl-20 px-lg-14">
 				<!-- subscribeSecBlock -->
-				<section class="subscribeSecBlock bgCover col-12 pt-xl-24 pb-xl-12 pt-lg-20 pt-md-16 pt-10 pb-md-8 pb-5" style="background-image: url({% static "images/n-bg3.jpg" %})">
-					<header class="col-12 mainHeader mb-sm-9 mb-6 text-center">
-						<h1 class="headingIV playfair fwEblod mb-4">Subscribe Our Newsletter</h1>
-						<span class="headerBorder d-block mb-md-5 mb-3"><img src="{% static "images/hbdr.png" %}" alt="Header Border" class="img-fluid img-bdr"></span>
-						<p class="mb-sm-6 mb-3">Enter Your email address to join our mailing list and keep yourself update</p>
-					</header>
-					<form class="emailForm1 mx-auto overflow-hidden d-flex flex-wrap">
-						<input type="email" class="form-control px-4 border-0" placeholder="Enter your mail...">
-						<button type="submit" class="btn btnTheme btnShop fwEbold text-white py-3 px-4">Shop Now <i class="fas fa-arrow-right ml-2"></i></button>
-					</form>
-				</section>
+				{% include "includes/subscribe_newsletter.html" %}
 			</div>
 			<!-- footerHolder -->
 			<aside class="footerHolder container-fluid overflow-hidden px-xl-20 px-lg-14 pt-xl-12 pb-xl-8 pt-lg-12 pt-md-8 pt-10 pb-lg-8">

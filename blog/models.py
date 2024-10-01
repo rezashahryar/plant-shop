@@ -5,7 +5,16 @@ from django.urls import reverse
 # Create your models here.
 
 
+class CategoryPost(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField()
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Post(models.Model):
+    category = models.ForeignKey(CategoryPost, on_delete=models.CASCADE, related_name='posts')
     title = models.CharField(max_length=255)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
     slug = models.SlugField()
