@@ -1,8 +1,13 @@
 from django.contrib import admin
 
-from .models import Product, ProductImage, Size, Color, CategoryProduct
+from .models import Product, ProductImage, Size, Color, CategoryProduct, TagProduct
 
 # Register your models here.
+
+
+@admin.register(TagProduct)
+class TagProductAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name', )}
 
 
 @admin.register(CategoryProduct)

@@ -10,7 +10,7 @@
 						<div class="col-12 pt-lg-23 pt-md-15 pt-sm-10 pt-6 text-center">
 							<h1 class="headingIV fwEbold playfair mb-4">Shop</h1>
 							<ul class="list-unstyled breadCrumbs d-flex justify-content-center">
-								<li class="mr-2"><a href="home.html">Home</a></li>
+								<li class="mr-2"><a href="{% url "pages:home" %}">Home</a></li>
 								<li class="mr-2">/</li>
 								<li class="active">Shop</li>
 							</ul>
@@ -50,32 +50,32 @@
 							<div class="row">
 								<!-- featureCol -->
                                  {% for product in products %}
-                                 <div class="col-12 col-sm-6 col-lg-4 featureCol mb-7">
-                                     <div class="border">
-                                         <div class="imgHolder position-relative w-100 overflow-hidden">
-                                             <img style="height:320px;" src="{{ product.cover.url }}" alt="image description" class="img-fluid w-100">
-                                             <ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
-                                                 <li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-heart d-block"></a></li>
-                                                 <li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-cart d-block"></a></li>
-                                                 <li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-eye d-block"></a></li>
-                                                 <li class="overflow-hidden"><a href="javascript:void(0);" class="icon-arrow d-block"></a></li>
-                                             </ul>
-                                         </div>
-                                         <div class="text-center py-5 px-4">
-                                             <span class="title d-block mb-2"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></span>
-                                             <span class="price d-block fwEbold">
-                                                {% if product.discount %}
-                                                    <del>{{ product.unit_price }} $</del>
-                                                    {{ product.price }} $
-                                                {% else %}
-                                                    {{ product.price }} $
-                                                {% endif %}
-                                            </span>
-                                             <span class="hotOffer fwEbold text-uppercase text-white position-absolute d-block">HOT</span>
-                                             <span class="hotOffer green fwEbold text-uppercase text-white position-absolute d-block ml-8">Sale</span>
-                                         </div>
-                                     </div>
-                                 </div>
+									<div class="col-12 col-sm-6 col-lg-4 featureCol mb-7">
+										<div class="border">
+											<div class="imgHolder position-relative w-100 overflow-hidden">
+												<img style="height:320px;" src="{{ product.cover.url }}" alt="image description" class="img-fluid w-100">
+												<ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
+													<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-heart d-block"></a></li>
+													<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-cart d-block"></a></li>
+													<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-eye d-block"></a></li>
+													<li class="overflow-hidden"><a href="javascript:void(0);" class="icon-arrow d-block"></a></li>
+												</ul>
+											</div>
+											<div class="text-center py-5 px-4">
+												<span class="title d-block mb-2"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></span>
+												<span class="price d-block fwEbold">
+													{% if product.discount %}
+														<del>{{ product.unit_price }} $</del>
+														{{ product.price }} $
+													{% else %}
+														{{ product.price }} $
+													{% endif %}
+												</span>
+												<span class="hotOffer fwEbold text-uppercase text-white position-absolute d-block">HOT</span>
+												<span class="hotOffer green fwEbold text-uppercase text-white position-absolute d-block ml-8">Sale</span>
+											</div>
+										</div>
+									</div>
                                  {% endfor %}
 								<!-- featureCol -->
 								<div class="col-12 pt-3 mb-lg-0 mb-md-6 mb-3">
@@ -108,7 +108,7 @@
 								<h3 class="headingVII fwEbold text-uppercase mb-5">PRODUCT CATEGORIES</h3>
 								<ul class="list-unstyled categoryList mb-0">
 									{% for cat in categories %}
-									<li class="mb-5 overflow-hidden"><a href="javascript:void(0);">{{ cat.name }} <span class="num border float-right">{{ cat.product_count }}</span></a></li>
+										<li class="mb-5 overflow-hidden"><a href="{% url "products:product_filter_by_category" cat.slug %}">{{ cat.name }} <span class="num border float-right">{{ cat.product_count }}</span></a></li>
 									{% endfor %}
 								</ul>
 							</section>
@@ -147,14 +147,9 @@
 							<section class="widget mb-9">
 								<h3 class="headingVII fwEbold text-uppercase mb-5">product tags</h3>
 								<ul class="list-unstyled tagNavList d-flex flex-wrap mb-0">
-									<li class="text-center"><a href="javascript:void(0);" class="md-round d-block">Plant</a></li>
-									<li class="text-center"><a href="javascript:void(0);" class="md-round d-block">Floor</a></li>
-									<li class="text-center"><a href="javascript:void(0);" class="md-round d-block">Indoor</a></li>
-									<li class="text-center"><a href="javascript:void(0);" class="md-round d-block">Green</a></li>
-									<li class="text-center"><a href="javascript:void(0);" class="md-round d-block">Healthy</a></li>
-									<li class="text-center"><a href="javascript:void(0);" class="md-round d-block">Cactus</a></li>
-									<li class="text-center"><a href="javascript:void(0);" class="md-round d-block">House plant</a></li>
-									<li class="text-center"><a href="javascript:void(0);" class="md-round d-block">Office tree</a></li>
+									{% for tag in tags %}
+										<li class="text-center"><a href="{% url "products:product_filter_by_tags" tag.slug %}" class="md-round d-block">{{ tag.name }}</a></li>
+									{% endfor %}
 								</ul>
 							</section>
 						</aside>

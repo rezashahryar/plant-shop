@@ -12,5 +12,7 @@ urlpatterns = [
     path('by-price/', views.search_by_price_list_view, name='search_by_price'),
     path('list/', views.ProductListView.as_view(), name='product_list'),
     path('detail/<slug:slug>/', views.ProductDetailView.as_view(), name='product_detail'),
+    path('tags/<slug:slug>/', views.ProductFilterByTagListView.as_view(), name='product_filter_by_tags'),
+    path('cat/<slug:slug>/', views.ProductFilterByCategoryListView.as_view(), name='product_filter_by_category'),
 ]
 

@@ -29,9 +29,17 @@ class CategoryProduct(models.Model):
         return self.name
 
 
+class TagProduct(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField()
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Product(models.Model):
     category = models.ForeignKey(CategoryProduct, on_delete=models.CASCADE, related_name='products')
-    # tags
+    tags = models.ManyToManyField(TagProduct, related_name='products')
     title = models.CharField(max_length=255)
     unit_price = models.DecimalField(max_digits=4, decimal_places=2)
     discount = models.IntegerField(null=True)
