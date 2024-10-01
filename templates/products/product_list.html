@@ -53,7 +53,7 @@
                                  <div class="col-12 col-sm-6 col-lg-4 featureCol mb-7">
                                      <div class="border">
                                          <div class="imgHolder position-relative w-100 overflow-hidden">
-                                             <img src="{{ product.cover.url }}" alt="image description" class="img-fluid w-100">
+                                             <img style="height:320px;" src="{{ product.cover.url }}" alt="image description" class="img-fluid w-100">
                                              <ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
                                                  <li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-heart d-block"></a></li>
                                                  <li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-cart d-block"></a></li>
@@ -96,10 +96,10 @@
 						<aside id="sidebar">
 							<!-- widget -->
 							<section class="widget overflow-hidden mb-9">
-								<form action="javascript:void(0);" class="searchForm position-relative border">
+								<form action="{% url "products:search_product" %}" method="GET" class="searchForm position-relative border">
 									<fieldset>
-										<input type="search" class="form-control" placeholder="Search product...">
-										<button class="position-absolute"><i class="icon-search"></i></button>
+										<input name="search" type="search" class="form-control" placeholder="Search product...">
+										<button type="submit" class="position-absolute"><i class="icon-search"></i></button>
 									</fieldset>
 								</form>
 							</section>

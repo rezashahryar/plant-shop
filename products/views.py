@@ -18,3 +18,14 @@ class ProductDetailView(generic.DetailView):
     def get_object(self):
         slug = self.kwargs['slug']
         return Product.objects.prefetch_related('images').get(slug=slug)
+    
+
+class SearchProductListView(generic.ListView):
+    template_name = 'products/product_list.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        query_search_param = self.request.GET.get('search')
+        print('+=' * 40)
+        print(query_search_param)
+        return Product.objects.filter(title__icontains=query_search_param)
