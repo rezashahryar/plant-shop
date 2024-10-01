@@ -1,6 +1,10 @@
-from django.views import generic
 
-from .models import Product
+from django.shortcuts import render
+from django.views import generic
+from django.db.models import Count
+
+from .models import CategoryProduct, Product
+from .forms import SearchByPriceProductForm
 
 # Create your views here.
 
@@ -9,6 +13,13 @@ class ProductListView(generic.ListView):
     queryset = Product.objects.all()
     template_name = 'products/product_list.html'
     context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = CategoryProduct.objects.all() \
+            .annotate(product_count=Count('products'))
+
+        return context
 
 
 class ProductDetailView(generic.DetailView):
@@ -26,6 +37,15 @@ class SearchProductListView(generic.ListView):
 
     def get_queryset(self):
         query_search_param = self.request.GET.get('search')
-        print('+=' * 40)
-        print(query_search_param)
         return Product.objects.filter(title__icontains=query_search_param)
+
+
+def search_by_price_list_view(request):
+    form = SearchByPriceProductForm(request.GET)
+    context = {}
+    if form.is_valid():
+        price1 = form.cleaned_data['price1']
+        price2 = form.cleaned_data['price2']
+        context['products'] = Product.objects.filter(unit_price__gt=price1, unit_price__lt=price2)
+
+    return render(request, 'products/product_list.html', context)

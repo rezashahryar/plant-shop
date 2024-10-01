@@ -19,10 +19,18 @@ class Color(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+
+class CategoryProduct(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField()
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Product(models.Model):
-    # category
+    category = models.ForeignKey(CategoryProduct, on_delete=models.CASCADE, related_name='products')
     # tags
     title = models.CharField(max_length=255)
     unit_price = models.DecimalField(max_digits=4, decimal_places=2)
