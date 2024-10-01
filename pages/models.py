@@ -4,6 +4,13 @@ from django.core.validators import validate_integer
 # Create your models here.
 
 
+class NewsLetter(models.Model):
+    email = models.EmailField()
+
+    def __str__(self) -> str:
+        return self.email
+
+
 class ContactUs(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()

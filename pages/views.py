@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import generic
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.views.decorators.http import require_POST
 
 from products.models import Product
 
-from .forms import ContactUsForm
+from .forms import ContactUsForm, SubscribeNewsLetterForm
 # Create your views here.
 
 
@@ -37,4 +38,12 @@ class ContactUsView(generic.FormView):
         form.save()
         messages.success(self.request, '.پیغام شما با موفقیت ارسال شد. از همکاری شما سپاسگزاریم')
         return super().form_valid(form)
-    
+
+
+@require_POST
+def subscribe_newsletter_view(request):
+    form = SubscribeNewsLetterForm(request.POST)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'your email successfully saved, thanks you')
+    return redirect('pages:home')

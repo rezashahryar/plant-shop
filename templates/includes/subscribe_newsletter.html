@@ -6,8 +6,9 @@
         <span class="headerBorder d-block mb-5"><img src="{% static "images/hbdr.png" %}" alt="Header Border" class="img-fluid img-bdr"></span>
         <p class="mb-6">Enter Your email address to join our mailing list and keep yourself update</p>
     </header>
-    <form class="emailForm1 mx-auto overflow-hidden d-flex flex-wrap">
-        <input type="email" class="form-control px-4 border-0" placeholder="Enter your mail...">
+    <form action="{% url "pages:subscribe_newsletter" %}" method="POST" class="emailForm1 mx-auto overflow-hidden d-flex flex-wrap">
+        {% csrf_token %}
+        <input name="email" type="email" class="form-control px-4 border-0" placeholder="Enter your mail...">
         <button type="submit" class="btn btnTheme btnShop fwEbold text-white py-3 px-4 py-md-3 px-md-4">Shop Now <i class="fas fa-arrow-right ml-2"></i></button>
     </form>
 </section>
