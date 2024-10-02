@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,34 +41,34 @@
                     <div class="row">
                         <div class="col-12 col-sm-4">
                             <a href="javascript:void(0);" class="tel d-flex align-items-end"><i
-                                    class="icon-call mr-2"></i> Hotline: (602) 462 8889</a>
+                                    class="icon-call mr-2"></i> {% trans "Hotline: (602) 462 8889" %}</a>
                         </div>
                         <div class="col-12 col-sm-4 text-center">
-                            <span class="txt d-block">Wellcome To Botanical Store</span>
+                            <span class="txt d-block">{% trans "Wellcome To Botanical Store" %}</span>
                         </div>
                         <div class="col-12 col-sm-4">
                             <!-- langListII -->
                             <ul class="nav nav-tabs langListII justify-content-end border-bottom-0">
                                 <li class="dropdown">
-                                    <span>Currency: </span>
+                                    <span>{% trans "Currency" %}: </span>
                                     <a class="d-inline dropdown-toggle text-uppercase" data-toggle="dropdown"
                                         href="javascript:void(0);" role="button" aria-haspopup="true"
                                         aria-expanded="false">USD</a>
                                     <div class="dropdown-menu text-uppercase pl-4 pr-4 border-0">
-                                        <a class="dropdown-item" href="javascript:void(0);">USD</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">VND</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">euro</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">{% trans "USD" %}</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">{% trans "VND" %}</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">{% trans "euro" %}</a>
                                     </div>
                                 </li>
                                 <li class="dropdown m-0">
-                                    <span>Languages: </span>
+                                    <span>{% trans "Languages" %}: </span>
                                     <a class="d-inline dropdown-toggle text-uppercase" data-toggle="dropdown"
                                         href="javascript:void(0);" role="button" aria-haspopup="true"
                                         aria-expanded="false">EN</a>
                                     <div class="dropdown-menu pl-4 pr-4">
-                                        <a class="dropdown-item" href="javascript:void(0);">English</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Vietnamese</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">French</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">{% trans "English" %}</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">{% trans "Vietnamese" %}</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">{% trans "French" %}</a>
                                     </div>
                                 </li>
                             </ul>
@@ -91,7 +92,7 @@
                             <nav class="navbar navbar-expand-lg navbar-light p-0 pageNav2 position-static">
                                 <button type="button" class="navbar-toggle collapsed position-relative"
                                     data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
-                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="sr-only">{% trans "Toggle navigation" %}</span>
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
@@ -100,7 +101,7 @@
                                     <ul class="navbar-nav mx-auto text-uppercase d-inline-block">
                                         <li class="nav-item dropdown">
                                             <a href="{% url "pages:home" %}" class="dropdown-toggle d-block"
-                                                aria-haspopup="true" aria-expanded="false">home</a>
+                                                aria-haspopup="true" aria-expanded="false">{% trans "home" %}</a>
                                             {% comment %} <ul
                                                 class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
                                                 <li class="d-block mx-0"><a href="home.html">Home 1</a></li>
@@ -110,7 +111,7 @@
                                         </li>
                                         {% url "products:product_list" as store %}
                                         <li class="nav-item dropdown {% if request.path == store %}active{% endif %}">
-                                            <a href="{% url "products:product_list" %}" class="dropdown-toggle d-block">Store</a>
+                                            <a href="{% url "products:product_list" %}" class="dropdown-toggle d-block">{% trans "Store" %}</a>
                                             {% comment %} <ul class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
                                                 <li class="d-block mx-0"><a href="shop.html">Shop Left Sidebar</a></li>
                                                 <li class="d-block mx-0"><a href="shop-detail.html">Single Product</a>
@@ -119,12 +120,12 @@
                                         </li>
                                         {% url "pages:about" as about %}
                                         <li class="nav-item {% if request.path == about %}active{% endif %}">
-                                            <a class="d-block" href="{% url "pages:about" %}">About</a>
+                                            <a class="d-block" href="{% url "pages:about" %}">{% trans "About" %}</a>
                                         </li>
                                         {% url "blog:post_list" as blog %}
                                         <li class="nav-item dropdown {% if request.path == blog %}active{% endif %}">
                                             <a href="{% url "blog:post_list" %}" class="dropdown-toggle d-block"
-                                                aria-haspopup="true" aria-expanded="false">Blog</a>
+                                                aria-haspopup="true" aria-expanded="false">{% trans "Blog" %}</a>
                                             {% comment %} <ul
                                                 class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
                                                 <li class="d-block mx-0"><a href="blog.html">Blog Left Sidebar</a></li>
@@ -134,7 +135,7 @@
                                         {% url "shop:cart" as cart_path %}
                                         <li class="nav-item dropdown {% if request.path == cart_path %}active{% endif %}">
                                             <a href="{% url "shop:cart" %}" class="dropdown-toggle d-block" aria-haspopup="true"
-                                                aria-expanded="false">Cart</a>
+                                                aria-expanded="false">{% trans "Cart" %}</a>
                                             {% comment %} <ul
                                                 class="list-unstyled text-capitalize dropdown-menu mt-0 py-0">
                                                 <li class="d-block mx-0"><a href="cart-page.html">Cart Page</a></li>
@@ -142,7 +143,7 @@
                                         </li>
                                         {% url "pages:contact-us" as contact %}
                                         <li class="nav-item {% if request.path == contact %}active{% endif %}">
-                                            <a class="d-block" href="{% url "pages:contact-us" %}">contact</a>
+                                            <a class="d-block" href="{% url "pages:contact-us" %}">{% trans "contact" %}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -175,21 +176,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-6 col-lg-4 mb-lg-0 mb-4">
-                        <h3 class="headingVI fwEbold text-uppercase mb-7">Contact Us</h3>
+                        <h3 class="headingVI fwEbold text-uppercase mb-7">{% trans "Contact Us" %}</h3>
                         <ul class="list-unstyled footerContactList mb-3">
                             <li class="mb-3 d-flex flex-nowrap pr-xl-20 pr-0"><span class="icon icon-place mr-3"></span>
-                                <address class="fwEbold m-0">Address: London Oxford Street, 012 United Kingdom.
+                                <address class="fwEbold m-0">{% trans "Address: London Oxford Street, 012 United Kingdom." %}
                                 </address>
                             </li>
                             <li class="mb-3 d-flex flex-nowrap"><span class="icon icon-phone mr-3"></span> <span
-                                    class="leftAlign">Phone : <a href="javascript:void(0);">(+032) 3456 7890</a></span>
+                                    class="leftAlign">Phone : <a href="javascript:void(0);">{% trans "(+032) 3456 7890" %}</a></span>
                             </li>
                             <li class="email d-flex flex-nowrap"><span class="icon icon-email mr-2"></span> <span
-                                    class="leftAlign">Email: <a
-                                        href="javascript:void(0);">Botanicalstore@gmail.com</a></span></li>
+                                    class="leftAlign">{% trans "Email" %}: <a
+                                        href="javascript:void(0);">{% trans "Botanicalstore@gmail.com" %}</a></span></li>
                         </ul>
                         <ul class="list-unstyled followSocailNetwork d-flex flex-nowrap">
-                            <li class="fwEbold mr-xl-11 mr-md-8 mr-3">Follow us:</li>
+                            <li class="fwEbold mr-xl-11 mr-md-8 mr-3">{% trans "Follow us" %}:</li>
                             <li class="mr-xl-6 mr-md-5 mr-2"><a href="javascript:void(0);"
                                     class="fab fa-facebook-f"></a></li>
                             <li class="mr-xl-6 mr-md-5 mr-2"><a href="javascript:void(0);" class="fab fa-twitter"></a>
@@ -200,32 +201,32 @@
                         </ul>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 pl-xl-14 mb-lg-0 mb-4">
-                        <h3 class="headingVI fwEbold text-uppercase mb-6">Information</h3>
+                        <h3 class="headingVI fwEbold text-uppercase mb-6">{% trans "Information" %}</h3>
                         <ul class="list-unstyled footerNavList">
-                            <li class="mb-1"><a href="javascript:void(0);">New Products</a></li>
-                            <li class="mb-2"><a href="javascript:void(0);">Top Sellers</a></li>
-                            <li class="mb-2"><a href="javascript:void(0);">Our Blog</a></li>
-                            <li class="mb-2"><a href="javascript:void(0);">About Our Shop</a></li>
-                            <li><a href="javascript:void(0);">Privacy policy</a></li>
+                            <li class="mb-1"><a href="javascript:void(0);">{% trans "New Products" %}</a></li>
+                            <li class="mb-2"><a href="javascript:void(0);">{% trans "Top Sellers" %}</a></li>
+                            <li class="mb-2"><a href="javascript:void(0);">{% trans "Our Blog" %}</a></li>
+                            <li class="mb-2"><a href="javascript:void(0);">{% trans "About Our Shop" %}</a></li>
+                            <li><a href="javascript:void(0);">{% trans "Privacy policy" %}</a></li>
                         </ul>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 pl-xl-12 mb-lg-0 mb-4">
-                        <h3 class="headingVI fwEbold text-uppercase mb-7">My Account</h3>
+                        <h3 class="headingVI fwEbold text-uppercase mb-7">{% trans "My Account" %}</h3>
                         <ul class="list-unstyled footerNavList">
-                            <li class="mb-1"><a href="javascript:void(0);">My account</a></li>
-                            <li class="mb-2"><a href="javascript:void(0);">Discount</a></li>
-                            <li class="mb-2"><a href="javascript:void(0);">Orders history</a></li>
-                            <li><a href="javascript:void(0);">Personal information</a></li>
+                            <li class="mb-1"><a href="javascript:void(0);">{% trans "My account" %}</a></li>
+                            <li class="mb-2"><a href="javascript:void(0);">{% trans "Discount" %}</a></li>
+                            <li class="mb-2"><a href="javascript:void(0);">{% trans "Orders history" %}</a></li>
+                            <li><a href="javascript:void(0);">{% trans "Personal information" %}</a></li>
                         </ul>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-2 pl-xl-18 mb-lg-0 mb-4">
-                        <h3 class="headingVI fwEbold text-uppercase mb-5">PRODUCTS</h3>
+                        <h3 class="headingVI fwEbold text-uppercase mb-5">{% trans "PRODUCTS" %}</h3>
                         <ul class="list-unstyled footerNavList">
-                            <li class="mb-2"><a href="javascript:void(0);">Delivery</a></li>
-                            <li class="mb-2"><a href="javascript:void(0);">Legal notice</a></li>
-                            <li class="mb-2"><a href="javascript:void(0);">Prices drop</a></li>
-                            <li class="mb-2"><a href="javascript:void(0);">New products</a></li>
-                            <li><a href="javascript:void(0);">Best sales</a></li>
+                            <li class="mb-2"><a href="javascript:void(0);">{% trans "Delivery" %}</a></li>
+                            <li class="mb-2"><a href="javascript:void(0);">{% trans "Legal notice" %}</a></li>
+                            <li class="mb-2"><a href="javascript:void(0);">{% trans "Prices drop" %}</a></li>
+                            <li class="mb-2"><a href="javascript:void(0);">{% trans "New products" %}</a></li>
+                            <li><a href="javascript:void(0);">{% trans "Best sales" %}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -237,8 +238,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 copyRightHolder v-II text-center pt-md-3 pb-md-4 py-2">
-                        <p class="mb-0">Coppyright 2019 by <a href="javascript:void(0);">Botanical Store</a> - All right
-                            reserved</p>
+                        <p class="mb-0">{% trans "Coppyright 2019 by" %} 
+                            <a href="javascript:void(0);">{% trans "Botanical Store" %}</a>
+                             - {% trans "All right reserved" %}
+                        </p>
                     </div>
                 </div>
             </div>
