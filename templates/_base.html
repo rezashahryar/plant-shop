@@ -131,8 +131,8 @@
                                                 <li class="d-block mx-0"><a href="blog-detail.html">Blog Detail</a></li>
                                             </ul> {% endcomment %}
                                         </li>
-                                        {% url "shop:cart" as cart %}
-                                        <li class="nav-item dropdown {% if request.path == cart %}active{% endif %}">
+                                        {% url "shop:cart" as cart_path %}
+                                        <li class="nav-item dropdown {% if request.path == cart_path %}active{% endif %}">
                                             <a href="{% url "shop:cart" %}" class="dropdown-toggle d-block" aria-haspopup="true"
                                                 aria-expanded="false">Cart</a>
                                             {% comment %} <ul
@@ -155,7 +155,7 @@
                             <li class="nav-item ml-0"><a class="nav-link icon-search" href="javascript:void(0);"></a>
                             </li>
                             <li class="nav-item"><a class="nav-link position-relative icon-cart"
-                                    href="javascript:void(0);"><span class="num rounded d-block">{{ cartt|length }}</span></a></li>
+                                    href="javascript:void(0);"><span class="num rounded d-block">{{ cart|length }}</span></a></li>
                             <li class="nav-item"><a class="nav-link icon-profile" href="javascript:void(0);"></a></li>
                         </ul>
                     </div>

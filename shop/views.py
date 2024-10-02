@@ -12,7 +12,7 @@ from .cart import Cart
 
 class CartView(generic.ListView):
     template_name = 'shop/cart.html'
-    context_object_name = 'cartt'
+    context_object_name = 'cart'
 
     def get_queryset(self):
         cart = Cart(self.request)
