@@ -24,45 +24,49 @@
 			<div class="cartHolder container pt-xl-21 pb-xl-24 py-lg-20 py-md-16 py-10">
 				<div class="row">
 					<!-- table-responsive -->
-					<div class="col-12 table-responsive mb-xl-22 mb-lg-20 mb-md-16 mb-10">
-						<!-- cartTable -->
-						<table class="table cartTable">
-							<thead>
-								<tr>
-									<th scope="col" class="text-uppercase fwEbold border-top-0">product</th>
-									<th scope="col" class="text-uppercase fwEbold border-top-0">price</th>
-									<th scope="col" class="text-uppercase fwEbold border-top-0">quantity</th>
-									<th scope="col" class="text-uppercase fwEbold border-top-0">total</th>
-								</tr>
-							</thead>
-							<tbody>
-                                {% for item in cart %}
-                                    <tr class="align-items-center">
-                                        <td class="d-flex align-items-center border-top-0 border-bottom px-0 py-6">
-                                            <div class="imgHolder">
-                                                <img src="{{ item.product_obj.cover.url }}" alt="image description" class="img-fluid">
-                                            </div>
-                                            <span class="title pl-2">
-                                                <a href="{{ item.product_obj.get_absolute_url }}">{{ item.product_obj.title }}</a>
-                                            </span>
-                                        </td>
-                                        <td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.product_obj.price }} $</td>
-                                        <td class="border-top-0 border-bottom px-0 py-6"><input type="number" placeholder="{{ item.quantity }}"></td>
-                                        <td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.total_price }} $ 
-                                            <form style="display:inline-block; margin-left:80px;" action="{% url "shop:remove_product" item.product_obj.pk %}" method="POST">
-                                                {% csrf_token %}
-                                                <button type="submit" class="fas fa-times float-right"></button>
-                                            </form>
-                                        </td>
-                                    </tr>
-								{% endfor %}
-							</tbody>
-						</table>
-                        <form style="margin-top:45px;" action="{% url "shop:clear_cart" %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btnTheme btnCart fwEbold text-center text-white md-round py-3 px-4 py-md-3 px-md-4">Clear the cart</button>
-                        </form>
-					</div>
+					{% if cart %}
+						<div class="col-12 table-responsive mb-xl-22 mb-lg-20 mb-md-16 mb-10">
+							<!-- cartTable -->
+							<table class="table cartTable">
+								<thead>
+									<tr>
+										<th scope="col" class="text-uppercase fwEbold border-top-0">product</th>
+										<th scope="col" class="text-uppercase fwEbold border-top-0">price</th>
+										<th scope="col" class="text-uppercase fwEbold border-top-0">quantity</th>
+										<th scope="col" class="text-uppercase fwEbold border-top-0">total</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for item in cart %}
+										<tr class="align-items-center">
+											<td class="d-flex align-items-center border-top-0 border-bottom px-0 py-6">
+												<div class="imgHolder">
+													<img src="{{ item.product_obj.cover.url }}" alt="image description" class="img-fluid">
+												</div>
+												<span class="title pl-2">
+													<a href="{{ item.product_obj.get_absolute_url }}">{{ item.product_obj.title }}</a>
+												</span>
+											</td>
+											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.product_obj.price }} $</td>
+											<td class="border-top-0 border-bottom px-0 py-6"><input type="number" placeholder="{{ item.quantity }}"></td>
+											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.total_price }} $ 
+												<form style="display:inline-block; margin-left:80px;" action="{% url "shop:remove_product" item.product_obj.pk %}" method="POST">
+													{% csrf_token %}
+													<button type="submit" class="fas fa-times float-right"></button>
+												</form>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+							<form style="margin-top:45px;" action="{% url "shop:clear_cart" %}" method="POST">
+								{% csrf_token %}
+								<button type="submit" class="btn btnTheme btnCart fwEbold text-center text-white md-round py-3 px-4 py-md-3 px-md-4">Clear the cart</button>
+							</form>
+						</div>
+					{% else %}
+						<p style="margin:auto; margin-bottom:50px;" class="alert alert-danger text-center">your cart is empty</p>
+					{% endif %}
 				</div>
 
 
