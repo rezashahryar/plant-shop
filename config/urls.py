@@ -26,6 +26,7 @@ urlpatterns = [
     path('product/', include('products.urls')),
     path('auth/', include('django.contrib.auth.urls')),
     path('auth/', include('accounts.urls')),
+    path('shop/', include('shop.urls')),
     path('', include('pages.urls')),
     # third party pack
     path('summernote/', include('django_summernote.urls')),

@@ -1,6 +1,9 @@
+from typing import Any
 from django.shortcuts import render
 from django.views import generic
 from django.db.models import Count
+
+# from shop.forms import AddToCartProductForm
 
 from .models import CategoryProduct, Product, TagProduct
 from .forms import SearchByPriceProductForm
@@ -28,6 +31,12 @@ class ProductDetailView(generic.DetailView):
     def get_object(self):
         slug = self.kwargs['slug']
         return Product.objects.prefetch_related('images').get(slug=slug)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['form'] = AddToCartProductForm()
+
+        return context
     
 
 class ProductFilterByCategoryListView(generic.ListView):

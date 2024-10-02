@@ -57,29 +57,32 @@
 								    <li class="mb-2">Shipping tax: <span>Free</span></li>
                                 {% endif %}
 							</ul>
-							<ul class="list-unstyled sizeList d-flex flex-wrap mb-4">
-								<li class="text-uppercase mr-6">Size:</li>
-								{% for size in product.sizes.all %}
-									<li class="mr-2">
-										<label for="check-1">
-											<input id="check-1" type="checkbox">
-											<span class="fake-input"></span>
-											<span class="fake-label">{{ size.name }}</span>
-										</label>
-									</li>
-								{% endfor %}
-							</ul>
-							<ul class="list-unstyled colorList d-flex flex-wrap mb-8">
-								<li class="text-uppercase mr-2">Color:</li>
-								{% for color in product.colors.all %}
-									<li class="mr-3"><a href="javascript:void(0);" class="red rounded"></a></li>
-									<li class="mr-3"><a href="javascript:void(0);" class="red rounded"></a></li>
-								{% endfor %}
-							</ul>
-							<div class="holder overflow-hidden d-flex flex-wrap mb-6">
-								<input type="number" placeholder="1">
-								<a href="javascript:void(0);" class="btn btnTheme btnShop fwEbold text-white md-round py-3 px-4 py-md-3 px-md-4">Add To Cart <i class="fas fa-arrow-right ml-2"></i></a>
-							</div>
+							<form action="{% url "shop:add_product" product.pk %}" method="POST">
+								{% csrf_token %}
+								<ul class="list-unstyled sizeList d-flex flex-wrap mb-4">
+									<li class="text-uppercase mr-6">Size:</li>
+									{% for size in product.sizes.all %}
+										<li class="mr-2">
+											<label for="check-1">
+												<input id="check-1" type="checkbox">
+												<span class="fake-input"></span>
+												<span class="fake-label">{{ size.name }}</span>
+											</label>
+										</li>
+									{% endfor %}
+								</ul>
+								<ul class="list-unstyled colorList d-flex flex-wrap mb-8">
+									<li class="text-uppercase mr-2">Color:</li>
+									{% for color in product.colors.all %}
+										<li class="mr-3"><a href="javascript:void(0);" class="red rounded"></a></li>
+										<li class="mr-3"><a href="javascript:void(0);" class="red rounded"></a></li>
+									{% endfor %}
+								</ul>
+								<div class="holder overflow-hidden d-flex flex-wrap mb-6">
+									<input name="quantity" type="number" min="1">
+									<button type="submit" class="btn btnTheme btnShop fwEbold text-white md-round py-3 px-4 py-md-3 px-md-4">Add To Cart <i class="fas fa-arrow-right ml-2"></i></button>
+								</div>
+							</form>
 							<ul class="list-unstyled socialNetwork d-flex flex-wrap mb-sm-11 mb-4">
 								<li class="text-uppercase mr-5">SHARE THIS PRODUCT:</li>
 								<li class="mr-4"><a href="javascript:void(0);" class="fab fa-facebook-f"></a></li>
