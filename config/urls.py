@@ -19,17 +19,20 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from debug_toolbar.toolbar import debug_toolbar_urls
+from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import gettext_lazy as _
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('post/', include('blog.urls')),
-    path('product/', include('products.urls')),
-    path('auth/', include('django.contrib.auth.urls')),
-    path('auth/', include('accounts.urls')),
-    path('shop/', include('shop.urls')),
+urlpatterns =  i18n_patterns(
+    path(_('admin/'), admin.site.urls),
+    path(_('post/'), include('blog.urls')),
+    path(_('product/'), include('products.urls')),
+    path(_('auth/'), include('django.contrib.auth.urls')),
+    path(_('auth/'), include('accounts.urls')),
+    path(_('shop/'), include('shop.urls')),
     path('', include('pages.urls')),
     # third party pack
     path('summernote/', include('django_summernote.urls')),
-] + debug_toolbar_urls()
+    path('rosetta/', include('rosetta.urls')),
+) + debug_toolbar_urls()
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

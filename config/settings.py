@@ -16,6 +16,8 @@ from pathlib import Path
 
 from decouple import config
 
+from django.utils.translation import gettext_lazy as _
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     # third party pack
     'django_summernote',
     'debug_toolbar',
+    'rosetta',
 
     # local apps
     'pages.apps.PagesConfig',
@@ -58,6 +61,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',   # for internationalization
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -128,6 +132,14 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+USE_L10N = True
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('fa', _('Persian'))
+)
+
+LOCALE_PATHS = (os.path.join('locale'), )
 
 USE_TZ = True
 
