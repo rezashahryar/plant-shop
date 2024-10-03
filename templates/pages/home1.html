@@ -109,7 +109,7 @@
 										<a class="d-block" href="{% url "pages:about" %}">{% trans "About" %}</a>
 									</li>
 									<li class="nav-item">
-										<a class="nLogo" href="home.html"><img src="{% static "images/logo.png" %}" alt="Botanical" class="img-fluid"></a>
+										<a class="nLogo" href="{% url "pages:home" %}"><img src="{% static "images/logo.png" %}" alt="Botanical" class="img-fluid"></a>
 									</li>
 									<li class="nav-item dropdown">
 										<a href="{% url "blog:post_list" %}" class="dropdown-toggle d-block">{% trans "Blog" %}</a>
@@ -119,7 +119,7 @@
 										</ul> {% endcomment %}
 									</li>
 									<li class="nav-item dropdown">
-										<a class="dropdown-toggle d-block">{% trans "Cart" %}</a>
+										<a href="{% url "shop:cart" %}" class="dropdown-toggle d-block">{% trans "Cart" %}</a>
 										{% comment %} <ul class="list-unstyled text-capitalize border-right border-bottom border-left dropdown-menu mt-0 py-0">
 											<li class="d-block mx-0"><a href="cart-page.html">Cart Page</a></li>
 										</ul> {% endcomment %}

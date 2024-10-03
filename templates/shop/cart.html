@@ -69,35 +69,55 @@
 						<p style="margin:auto; margin-bottom:50px;" class="alert alert-danger text-center">{% trans "your cart is empty" %}</p>
 					{% endif %}
 				</div>
-				<div class="row">
-					<div class="col-12">
-						<form action="javascript:void(0);" class="cartForm mb-5">
-							<div class="form-group mb-0">
-								<label for="note" class="fwEbold text-uppercase d-block mb-1">{% trans "add note" %}</label>
-								<textarea id="note" class="form-control"></textarea>
-							</div>
-						</form>
-					</div>
-					<div class="col-12 col-md-6">
-						<form action="javascript:void(0);" class="couponForm mb-md-0 mb-5">
-							<fieldset>
-								<div class="mt-holder d-inline-block align-bottom mr-lg-5 mr-0 mb-lg-0 mb-2">
-									<label for="code" class="fwEbold text-uppercase d-block mb-1">{% trans "promo code" %}</label>
-									<input type="text" id="code" class="form-control">
-								</div>
-								<button type="submit" class="btn btnTheme btnCart fwEbold text-center text-white md-round py-3 px-4 py-md-3 px-md-4">{% trans "Apply" %}</button>
-							</fieldset>
-						</form>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="d-flex justify-content-between">
-							<strong class="txt fwEbold text-uppercase mb-1">{% trans "subtotal" %}</strong>
-							<strong class="price fwEbold text-uppercase mb-1">{{ cart.total_price_of_cart }} $</strong>
+				<form action="{% url "shop:submit_order" %}" method="POST" class="cartForm mb-5">
+					{% csrf_token %}
+					<div class="row mb-10">
+						<div class="col">
+						<input name="first_name" type="text" class="form-control bg-white" placeholder="First name" aria-label="First name">
 						</div>
-						<a href="javascript:void(0);" class="btn btnTheme w-100 fwEbold text-center text-white md-round py-3 px-4 py-md-3 px-md-4">{% trans "Proceed to checkout" %}</a>
+						<div class="col">
+						<input name="last_name" type="text" class="form-control bg-white" placeholder="Last name" aria-label="Last name">
+						</div>
+						<div class="col">
+						<input name="email" type="email" class="form-control bg-white" placeholder="email" aria-label="First name">
+						</div>
+						<div class="col">
+						<input name="phone_number" type="text" class="form-control bg-white" placeholder="phone number" aria-label="Last name">
+						</div>
+						<div>
+							<label for="exampleFormControlTextarea1" class="form-label">Address</label>
+							<textarea name="address" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						</div>
+
 					</div>
-				</div>
-			</div>
+					<div class="row">
+						<div class="col-12">
+								<div class="form-group mb-0">
+									<label for="note" class="fwEbold text-uppercase d-block mb-1">{% trans "add note" %}</label>
+									<textarea name="order_note" id="note" class="form-control"></textarea>
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<form action="javascript:void(0);" class="couponForm mb-md-0 mb-5">
+									<fieldset>
+										<div class="mt-holder d-inline-block align-bottom mr-lg-5 mr-0 mb-lg-0 mb-2">
+											<label for="code" class="fwEbold text-uppercase d-block mb-1">{% trans "promo code" %}</label>
+											<input type="text" id="code" class="form-control">
+										</div>
+										<button type="submit" class="btn btnTheme btnCart fwEbold text-center text-white md-round py-3 px-4 py-md-3 px-md-4">{% trans "Apply" %}</button>
+									</fieldset>
+								</form>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="d-flex justify-content-between">
+									<strong class="txt fwEbold text-uppercase mb-1">{% trans "subtotal" %}</strong>
+									<strong class="price fwEbold text-uppercase mb-1">{{ cart.total_price_of_cart }} $</strong>
+								</div>
+								<button type="submit" class="btn btnTheme w-100 fwEbold text-center text-white md-round py-3 px-4 py-md-3 px-md-4">{% trans "Proceed to checkout" %}</a>
+							</div>
+						</div>
+					</div>
+				</form>
 			<div class="container mb-lg-24 mb-md-16 mb-10">
 				<!-- subscribeSecBlock -->
 				{% include "includes/subscribe_newsletter.html" %}

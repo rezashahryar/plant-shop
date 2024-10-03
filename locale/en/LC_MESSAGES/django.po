@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-03 01:37+0330\n"
+"POT-Creation-Date: 2024-10-03 15:01+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,11 +85,14 @@ msgstr ""
 msgid "Store"
 msgstr ""
 
-#: .\templates\_base.html:129 .\templates\pages\home1.html:111
+#: .\templates\_base.html:129 .\templates\pages\about.html:16
+#: .\templates\pages\home1.html:111
 msgid "About"
 msgstr ""
 
-#: .\templates\_base.html:134 .\templates\pages\home1.html:117
+#: .\templates\_base.html:134 .\templates\blog\post_detail.html:13
+#: .\templates\blog\post_detail.html:17 .\templates\blog\post_list.html:13
+#: .\templates\blog\post_list.html:17 .\templates\pages\home1.html:117
 msgid "Blog"
 msgstr ""
 
@@ -114,7 +117,8 @@ msgstr ""
 msgid "(+032) 3456 7890"
 msgstr ""
 
-#: .\templates\_base.html:197 .\templates\pages\home1.html:455
+#: .\templates\_base.html:197 .\templates\blog\post_detail.html:163
+#: .\templates\pages\home1.html:455
 msgid "Email"
 msgstr ""
 
@@ -204,6 +208,160 @@ msgstr ""
 
 #: .\templates\_base.html:251 .\templates\pages\home1.html:501
 msgid "All right reserved"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:15 .\templates\blog\post_list.html:15
+#: .\templates\pages\about.html:14 .\templates\shop\cart.html:14
+msgid "Home"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:39
+msgid "Post by"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:50 .\templates\blog\post_list.html:55
+msgid "Search"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:53 .\templates\blog\post_list.html:58
+msgid "Search product..."
+msgstr ""
+
+#: .\templates\blog\post_detail.html:64 .\templates\blog\post_list.html:76
+msgid "ARCHIVES"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:75 .\templates\blog\post_list.html:87
+msgid "CATEGORIES"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:103
+msgid "SHARE THIS POST:"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:115
+msgid "COMMENTS"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:122
+msgid "Reply"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:150
+msgid "LeaVe A Comment"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:154
+msgid "comment"
+msgstr ""
+
+#: .\templates\blog\post_detail.html:173
+msgid "Post Now"
+msgstr ""
+
+#: .\templates\blog\post_list.html:65 .\templates\includes\recent_post.html:2
+msgid "RECENT POSTS"
+msgstr ""
+
+#: .\templates\includes\recent_comments.html:2
+msgid "RECENT COMMENTS"
+msgstr ""
+
+#: .\templates\includes\subscribe_newsletter.html:5
+msgid "Subscribe Our Newsletter"
+msgstr ""
+
+#: .\templates\includes\subscribe_newsletter.html:7
+msgid ""
+"Enter Your email address to join our mailing list and keep yourself update"
+msgstr ""
+
+#: .\templates\includes\subscribe_newsletter.html:12
+msgid "Shop Now"
+msgstr ""
+
+#: .\templates\pages\about.html:12
+msgid "About Us"
+msgstr ""
+
+#: .\templates\pages\about.html:26
+msgid "A Minimal Team"
+msgstr ""
+
+#: .\templates\pages\about.html:27
+msgid "For a Better World"
+msgstr ""
+
+#: .\templates\pages\about.html:43
+msgid "Happy Clients"
+msgstr ""
+
+#: .\templates\pages\about.html:47
+msgid "completed project"
+msgstr ""
+
+#: .\templates\pages\about.html:51
+msgid "awesome staff"
+msgstr ""
+
+#: .\templates\pages\about.html:55
+msgid "winning awards"
+msgstr ""
+
+#: .\templates\pages\about.html:73
+msgid "connecting people"
+msgstr ""
+
+#: .\templates\pages\about.html:79 .\templates\pages\about.html:93
+#: .\templates\pages\about.html:107 .\templates\pages\about.html:121
+msgid ""
+"To succeed you must believe. When you believe, you will succeed. Surround "
+"yourself with angels, positive energy, beautiful people, beautiful souls, "
+"clean heart, angel. Let me be clear, you have to make it through the jungle "
+"to make it to paradise, that’s the key, Lion! Lion!"
+msgstr ""
+
+#: .\templates\pages\about.html:87
+msgid "we build your dream"
+msgstr ""
+
+#: .\templates\pages\about.html:101
+msgid "nothing to fear"
+msgstr ""
+
+#: .\templates\pages\about.html:115
+msgid "make the world better"
+msgstr ""
+
+#: .\templates\pages\about.html:133
+msgid "Delivery Process"
+msgstr ""
+
+#: .\templates\pages\about.html:141
+msgid "Choose your products"
+msgstr ""
+
+#: .\templates\pages\about.html:142
+msgid ""
+"There are many variations of passages of lorem ipsum available, but the "
+"majority have suffered alteration in some form, by injected humour. Both "
+"betanin"
+msgstr ""
+
+#: .\templates\pages\about.html:148
+msgid "Connect nearest stored"
+msgstr ""
+
+#: .\templates\pages\about.html:155
+msgid "Share your location"
+msgstr ""
+
+#: .\templates\pages\about.html:162
+msgid "Get delivered fast"
+msgstr ""
+
+#: .\templates\pages\about.html:172
+msgid "Meet Our Team"
 msgstr ""
 
 #: .\templates\pages\home1.html:46
@@ -320,10 +478,6 @@ msgstr ""
 
 #: .\templates\shop\cart.html:12
 msgid "My Cart"
-msgstr ""
-
-#: .\templates\shop\cart.html:14
-msgid "Home"
 msgstr ""
 
 #: .\templates\shop\cart.html:16

@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 {% load static %}
 {% load blog_tags %}
+{% load i18n %}
 
 {% block body %}
 		<main>
@@ -9,11 +10,11 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-12 pt-lg-23 pt-md-15 pt-sm-10 pt-6 text-center">
-							<h1 class="headingIV fwEbold playfair mb-4">Blog</h1>
+							<h1 class="headingIV fwEbold playfair mb-4">{% trans "Blog" %}</h1>
 							<ul class="list-unstyled breadCrumbs d-flex justify-content-center">
-								<li class="mr-2"><a href="{% url "pages:home" %}">Home</a></li>
+								<li class="mr-2"><a href="{% url "pages:home" %}">{% trans "Home" %}</a></li>
 								<li class="mr-2">/</li>
-								<li class="active">Blog</li>
+								<li class="active">{% trans "Blog" %}</li>
 							</ul>
 						</div>
 					</div>
@@ -51,17 +52,17 @@
 						<aside id="sidebar">
 							<!-- widget -->
 							<section class="widget overflow-hidden mb-md-9 mb-6">
-								<h3 class="headingVII fwEbold text-uppercase mb-4">Search</h3>
+								<h3 class="headingVII fwEbold text-uppercase mb-4">{% trans "Search" %}</h3>
 								<form action="javascript:void(0);" class="searchForm position-relative border">
 									<fieldset>
-										<input type="search" class="form-control" placeholder="Search product...">
+										<input type="search" class="form-control" placeholder="{% trans "Search product..." %}">
 										<button class="position-absolute"><i class="icon-search"></i></button>
 									</fieldset>
 								</form>
 							</section>
 							<!-- widget -->
 							<section class="widget overflow-hidden mb-md-9 mb-6">
-								<h3 class="headingVII fwEbold text-uppercase mb-2">RECENT POSTS</h3>
+								<h3 class="headingVII fwEbold text-uppercase mb-2">{% trans "RECENT POSTS" %}</h3>
 								<ul class="list-unstyled recentPostList mb-0">
 									{% for post in posts|slice:":4" %}
 									<li><a href="javascript:void(0);" class="py-2 d-block">{{ post.title }}</a></li>
@@ -72,7 +73,7 @@
 							{% recent_comments_of_blog_section %}
 							<!-- widget -->
 							<section class="widget overflow-hidden mb-md-6 mb-3">
-								<h3 class="headingVII fwEbold text-uppercase mb-4">ARCHIVES</h3>
+								<h3 class="headingVII fwEbold text-uppercase mb-4">{% trans "ARCHIVES" %}</h3>
 								<ul class="list-unstyled archiveList mb-0">
 									<li class="mb-3"><a href="javascript:void(0);" class="d-block">March 2018</a></li>
 									<li class="mb-3"><a href="javascript:void(0);" class="d-block">December 2018</a></li>
@@ -83,7 +84,7 @@
 							</section>
 							<!-- widget -->
 							<section class="widget overflow-hidden mb-md-5 mb-3">
-								<h3 class="headingVII fwEbold text-uppercase mb-4">CATEGORIES</h3>
+								<h3 class="headingVII fwEbold text-uppercase mb-4">{% trans "CATEGORIES" %}</h3>
 								<ul class="list-unstyled archiveList mb-0">
 									{% for cat in categories %}
 										<li class="mb-3">
