@@ -12,6 +12,9 @@ from .cart import Cart
 
 # Create your views here.
 
+def callback_gateway(request):
+    return redirect('pages:home')
+
 
 class CartView(generic.ListView):
     template_name = 'shop/cart.html'

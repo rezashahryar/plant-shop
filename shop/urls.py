@@ -1,6 +1,9 @@
 from django.urls import path
 
+# from views.payment_views import go_to_gateway_view
+
 from . import views
+from .payment_views import go_to_gateway_view
 
 # create your urls here
 
@@ -13,4 +16,6 @@ urlpatterns = [
     path('remove/<int:pk>/', views.RemoveProductFromCart.as_view(), name='remove_product'),
     path('clear/', views.ClearTheCart.as_view(), name='clear_cart'),
     path('submit-order/', views.submit_order_view, name='submit_order'),
+    path('payment/', go_to_gateway_view, name='payment'),
+    path('callback-gateway/', views.callback_gateway, name='callback-gateway')
 ]

@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
+from azbankgateways.urls import az_bank_gateways_urls
 
 urlpatterns =  i18n_patterns(
     path(_('admin/'), admin.site.urls),
@@ -33,6 +34,7 @@ urlpatterns =  i18n_patterns(
     # third party pack
     path('summernote/', include('django_summernote.urls')),
     path('rosetta/', include('rosetta.urls')),
+    path("bankgateways/", az_bank_gateways_urls()),
 ) + debug_toolbar_urls()
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
