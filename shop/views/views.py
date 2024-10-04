@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required
 from products.models import Product
 from shop.models import OrderItem
 
-from .forms import AddToCartProductForm, OrderForm
-from .cart import Cart
+from shop.forms import AddToCartProductForm, OrderForm
+from shop.cart import Cart
 
 # Create your views here.
 
