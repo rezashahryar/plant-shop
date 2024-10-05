@@ -63,21 +63,21 @@
 									<li class="text-uppercase mr-6">Size:</li>
 									{% for size in product.sizes.all %}
 										<li class="mr-2">
-											<label for="check-1">
-												<input id="check-1" type="checkbox">
+											<label for="{{ size.name }}">
+												<input name="size" value="{{ size.name }}" id="{{ size.name }}" type="checkbox">
 												<span class="fake-input"></span>
 												<span class="fake-label">{{ size.name }}</span>
 											</label>
 										</li>
 									{% endfor %}
 								</ul>
-								<ul class="list-unstyled colorList d-flex flex-wrap mb-8">
+								{% comment %} <ul class="list-unstyled colorList d-flex flex-wrap mb-8">
 									<li class="text-uppercase mr-2">Color:</li>
 									{% for color in product.colors.all %}
 										<li class="mr-3"><a href="javascript:void(0);" class="red rounded"></a></li>
 										<li class="mr-3"><a href="javascript:void(0);" class="red rounded"></a></li>
 									{% endfor %}
-								</ul>
+								</ul> {% endcomment %}
 								<div class="holder overflow-hidden d-flex flex-wrap mb-6">
 									<input name="quantity" type="number" min="1">
 									<button type="submit" class="btn btnTheme btnShop fwEbold text-white md-round py-3 px-4 py-md-3 px-md-4">Add To Cart <i class="fas fa-arrow-right ml-2"></i></button>

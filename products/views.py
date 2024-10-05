@@ -86,7 +86,7 @@ def search_by_price_list_view(request):
     if form.is_valid():
         price1 = form.cleaned_data['price1']
         price2 = form.cleaned_data['price2']
-        context['products'] = Product.objects.filter(unit_price__gt=price1, unit_price__lt=price2)
+        context['products'] = Product.objects.filter(unit_price__gt=price1, unit_price__lte=price2)
     context['categories'] = CategoryProduct.objects.all() \
             .annotate(product_count=Count('products'))
     context['tags'] = TagProduct.objects.all()

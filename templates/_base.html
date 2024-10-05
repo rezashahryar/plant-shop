@@ -60,15 +60,15 @@
                                         <a class="dropdown-item" href="javascript:void(0);">{% trans "euro" %}</a>
                                     </div>
                                 </li>
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
                                 <li class="dropdown m-0">
                                     <span>{% trans "Languages" %}: </span>
                                     <a class="d-inline dropdown-toggle text-uppercase" data-toggle="dropdown"
                                         href="javascript:void(0);" role="button" aria-haspopup="true"
-                                        aria-expanded="false">EN</a>
+                                        aria-expanded="false">{{ LANGUAGE_CODE }}</a>
                                     <div class="dropdown-menu pl-4 pr-4">
-                                        {% get_current_language as LANGUAGE_CODE %}
-                                        {% get_available_languages as LANGUAGES %}
-                                        {% get_language_info_list for LANGUAGES as languages %}
 
                                         {% for language in languages %}
                                             <a class="dropdown-item" href="/{{ language.code }}/">{{ language.name_local }}</a>

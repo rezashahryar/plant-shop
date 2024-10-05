@@ -38,8 +38,10 @@ class AddProductToCartView(View):
         product_obj = get_object_or_404(Product, pk=id)
 
         quantity = int(request.POST['quantity'])
+        size = request.POST.get('size')
 
-        cart.add(product_obj, quantity)
+        cart.add(product_obj, size, quantity)
+        print(request.POST)
         messages.success(request, 'add product to your cart')
 
         return redirect('shop:cart')
@@ -47,11 +49,10 @@ class AddProductToCartView(View):
 
 class RemoveProductFromCart(View):
 
-    def post(self, request, pk):
+    def post(self, request, unique_id):
         cart = Cart(request)
-        product_obj = get_object_or_404(Product, pk=pk)
 
-        cart.remove_product(product_obj)
+        cart.remove_product(unique_id)
         messages.success(request, 'DONE!')
         return redirect('shop:cart')
     

@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from products.models import Product
 
 class Cart:
@@ -13,40 +14,37 @@ class Cart:
         self.cart = cart
 
 
-    def add(self, product, quantity=1):
+    def add(self, product, size, quantity=1):
+        # generate id for each product of cart based on product_pk and size
+        unique_id_product = self.generator_unique_id_product(product.pk, size)
+
         product_pk = str(product.pk)
         
-        if product_pk not in self.cart:
-            self.cart[product_pk] = {'quantity': quantity}
+        if unique_id_product not in self.cart:
+            self.cart[unique_id_product] = {'quantity': quantity, 'size': size, 'product_pk': product.pk}
         # if replace_current_quantity:
         #     self.cart[product_pk]['quantity'] = quantity
         else:
-            self.cart[product_pk]['quantity'] += quantity
+            self.cart[unique_id_product]['quantity'] += quantity
 
         self.save()
 
-    def remove_product(self, product):
-        product_pk = str(product.pk)
-        if product_pk in self.cart:
-            del self.cart[product_pk]
+    def remove_product(self, unique_id):
+        if unique_id in self.cart:
+            del self.cart[unique_id]
         self.save()
 
-    # def __iter__(self):
-
-    #     for item in self.cart:
-    #         yield item
+    def generator_unique_id_product(self, product_pk, size):
+        return f'{product_pk}-{size}'
 
     def __iter__(self):
-        list_id_of_products = self.cart.keys()
-        products = Product.objects.filter(id__in=list_id_of_products)
-
         cart = self.cart.copy()
-
-        for product in products:
-            cart[str(product.pk)]['product_obj'] = product
-            cart[str(product.pk)]['total_price'] = product.price * cart[str(product.pk)]['quantity']
         
         for item in cart.values():
+            product = get_object_or_404(Product, pk=item['product_pk'])
+            item['product_obj'] = product
+            item['total_price'] = product.price * item['quantity']
+            item['unique_id'] = self.generator_unique_id_product(product.pk, item['size'])
             yield item
 
     def total_price_of_cart(self):

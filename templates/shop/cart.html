@@ -32,6 +32,7 @@
 								<thead>
 									<tr>
 										<th scope="col" class="text-uppercase fwEbold border-top-0">{% trans "product" %}</th>
+										<th scope="col" class="text-uppercase fwEbold border-top-0">{% trans "size" %}</th>
 										<th scope="col" class="text-uppercase fwEbold border-top-0">{% trans "price" %}</th>
 										<th scope="col" class="text-uppercase fwEbold border-top-0">{% trans "quantity" %}</th>
 										<th scope="col" class="text-uppercase fwEbold border-top-0">{% trans "total" %}</th>
@@ -48,10 +49,11 @@
 													<a href="{{ item.product_obj.get_absolute_url }}">{{ item.product_obj.title }}</a>
 												</span>
 											</td>
+											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.size }}</td>
 											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.product_obj.price }} $</td>
 											<td class="border-top-0 border-bottom px-0 py-6"><input type="number" placeholder="{{ item.quantity }}"></td>
 											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.total_price }} $ 
-												<form style="display:inline-block; margin-left:80px;" action="{% url "shop:remove_product" item.product_obj.pk %}" method="POST">
+												<form style="display:inline-block; margin-left:80px;" action="{% url "shop:remove_product" item.unique_id %}" method="POST">
 													{% csrf_token %}
 													<button type="submit" class="fas fa-times float-right"></button>
 												</form>
