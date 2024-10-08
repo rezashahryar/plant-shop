@@ -3,11 +3,12 @@ from django.views import View, generic
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 from products.models import Product
-from shop.models import OrderItem
+from shop.models import Coupon, OrderItem
 
-from shop.forms import AddToCartProductForm, OrderForm
+from shop.forms import AddToCartProductForm, ApplyCouponForm, OrderForm
 from shop.cart import Cart
 
 # Create your views here.
@@ -38,10 +39,12 @@ class AddProductToCartView(View):
         product_obj = get_object_or_404(Product, pk=id)
 
         quantity = int(request.POST['quantity'])
+        
         size = request.POST.get('size')
+        if not size:
+            size = product_obj.sizes.all()[0].name
 
         cart.add(product_obj, size, quantity)
-        print(request.POST)
         messages.success(request, 'add product to your cart')
 
         return redirect('shop:cart')
@@ -91,4 +94,25 @@ def submit_order_view(request):
                 price=item['product_obj'].price,
             )
 
-    return redirect('shop:cart')
+            item['product_obj'].inventory -= item['quantity']
+            item['product_obj'].save()
+
+        return redirect('shop:payment_idpay', order_form_obj.pk)
+
+    return redirect('shop:payment')
+
+
+@require_POST
+def apply_coupon_code(request):
+    datetime_now = timezone.now()
+    form = ApplyCouponForm(request.POST)
+
+    if form.is_valid():
+        code = form.cleaned_data['code']
+        try:
+            coupon_obj = Coupon.objects.get(code=code, valid_from__lte=datetime_now, valid_until__gte=datetime_now, active=True)
+            request.session['coupon_id'] = coupon_obj.pk
+        except Coupon.DoesNotExist:
+            request.session['coupon_id'] = None
+        
+        return redirect('shop:cart')

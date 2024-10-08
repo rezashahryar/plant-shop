@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load product_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +41,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-sm-4">
-                            <a href="javascript:void(0);" class="tel d-flex align-items-end"><i
+                            <a href="#" class="tel d-flex align-items-end"><i
                                     class="icon-call mr-2"></i> {% trans "Hotline: (602) 462 8889" %}</a>
                         </div>
                         <div class="col-12 col-sm-4 text-center">
@@ -52,12 +53,13 @@
                                 <li class="dropdown">
                                     <span>{% trans "Currency" %}: </span>
                                     <a class="d-inline dropdown-toggle text-uppercase" data-toggle="dropdown"
-                                        href="javascript:void(0);" role="button" aria-haspopup="true"
-                                        aria-expanded="false">USD</a>
+                                        href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">{% get_unit_money %}</a>
+                                        {% get_available_unit_money as list_of_unit_money %}
                                     <div class="dropdown-menu text-uppercase pl-4 pr-4 border-0">
-                                        <a class="dropdown-item" href="javascript:void(0);">{% trans "USD" %}</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">{% trans "VND" %}</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">{% trans "euro" %}</a>
+                                        {% for unit in list_of_unit_money %}
+                                            <a class="dropdown-item" href="{% url "pages:change_unit_money" unit.0 %}">{{ unit.1 }}</a>
+                                        {% endfor %}
                                     </div>
                                 </li>
                                 {% get_current_language as LANGUAGE_CODE %}
@@ -69,7 +71,6 @@
                                         href="javascript:void(0);" role="button" aria-haspopup="true"
                                         aria-expanded="false">{{ LANGUAGE_CODE }}</a>
                                     <div class="dropdown-menu pl-4 pr-4">
-
                                         {% for language in languages %}
                                             <a class="dropdown-item" href="/{{ language.code }}/">{{ language.name_local }}</a>
                                         {% endfor %}

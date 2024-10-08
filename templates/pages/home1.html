@@ -1,5 +1,7 @@
 {% load static %}
 {% load i18n %}
+{% load product_tags %}
+{% load humanize %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,11 +70,12 @@
 							</div>
 						</li>
 						<li class="dropdown">
-							<a class="dropdown-toggle text-uppercase" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">USD</a>
+							<a class="dropdown-toggle text-uppercase" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">{% get_unit_money %}</a>
+							{% get_available_unit_money as list_of_unit_money %}
 							<div class="dropdown-menu text-uppercase pl-4 pr-4 border-0">
-								<a class="dropdown-item" href="javascript:void(0);">USD</a>
-								<a class="dropdown-item" href="javascript:void(0);">VND</a>
-								<a class="dropdown-item" href="javascript:void(0);">euro</a>
+								{% for unit in list_of_unit_money %}
+									<a class="dropdown-item" href="{% url "pages:change_unit_money" unit.0 %}">{{ unit.1 }}</a>
+								{% endfor %}
 							</div>
 						</li>
 					</ul>
@@ -132,7 +135,7 @@
 						</nav>
 						{% if messages %}
 							{% for message in messages %}
-								<p style="margin: 10px 0; text-align:center;" class="alert alert-success">{{ message }}</p>
+								<p style="margin: 10px 0; text-align:center;" class="alert alert-{{ message.tags }}">{{ message }}</p>
 							{% endfor %}
 						{% endif %}
 						<div class="logo">
@@ -144,8 +147,8 @@
 					<!-- wishList -->
 					<ul class="nav nav-tabs wishList pt-xl-5 pt-lg-4 pt-3 mr-xl-3 mr-0 justify-content-end border-bottom-0">
 						<li class="nav-item"><a class="nav-link icon-search" href="javascript:void(0);"></a></li>
-						<li class="nav-item"><a class="nav-link position-relative icon-heart" href="javascript:void(0);"><span class="num rounded d-block">1</span></a></li>
-						<li class="nav-item"><a class="nav-link position-relative icon-cart" href="javascript:void(0);"><span class="num rounded d-block">2</span></a></li>
+						{% comment %} <li class="nav-item"><a class="nav-link position-relative icon-heart" href="javascript:void(0);"><span class="num rounded d-block">1</span></a></li> {% endcomment %}
+						<li class="nav-item"><a class="nav-link position-relative icon-cart" href="{% url "shop:cart" %}"><span class="num rounded d-block">{{ cart|length }}</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -277,13 +280,13 @@
 									<ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
 										<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-heart d-block"></a></li>
 										<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-cart d-block"></a></li>
-										<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-eye d-block"></a></li>
+										<li class="mr-2 overflow-hidden"><a href="{{ product.get_absolute_url }}" class="icon-eye d-block"></a></li>
 										<li class="overflow-hidden"><a href="javascript:void(0);" class="icon-arrow d-block"></a></li>
 									</ul>
 								</div>
 								<div class="text-center py-xl-5 py-sm-4 py-2 px-xl-2 px-1">
 									<span class="title d-block mb-2"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></span>
-									<span class="price d-block fwEbold">{{ product.price }} $</span>
+									<span class="price d-block fwEbold">{% converter_unit_money product.price unit=settings.CHOOSE_UNIT_MONEY|intcomma %}</span>
 								</div>
 							</div>
 						</div>
@@ -376,10 +379,10 @@
 										<span class="title d-block mb-2"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></span>
 										<span class="price d-block fwEbold">
 											{% if product.discount %}
-												<del>{{ product.unit_price }} $</del>
-												{{ product.price }} $
+												<del>{% converter_unit_money product.unit_price unit=settings.CHOOSE_UNIT_MONEY %}</del>
+												{% converter_unit_money product.price unit=settings.CHOOSE_UNIT_MONEY %}
 											{% else %}
-												{{ product.unit_price }} $
+												{% converter_unit_money product.price unit=settings.CHOOSE_UNIT_MONEY %}
 											{% endif %}
 										</span>
 										<span class="hotOffer fwEbold text-uppercase text-white position-absolute d-block">HOT</span>

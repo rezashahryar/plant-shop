@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 {% load static %}
 {% load i18n %}
+{% load product_tags %}
 
 {% block body %}
 		<main>
@@ -50,9 +51,9 @@
 												</span>
 											</td>
 											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.size }}</td>
-											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.product_obj.price }} $</td>
+											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{% converter_unit_money item.product_obj.price unit=settings.CHOOSE_UNIT_MONEY %}</td>
 											<td class="border-top-0 border-bottom px-0 py-6"><input type="number" placeholder="{{ item.quantity }}"></td>
-											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{{ item.total_price }} $ 
+											<td class="fwEbold border-top-0 border-bottom px-0 py-6">{% converter_unit_money item.total_price unit=settings.CHOOSE_UNIT_MONEY %}
 												<form style="display:inline-block; margin-left:80px;" action="{% url "shop:remove_product" item.unique_id %}" method="POST">
 													{% csrf_token %}
 													<button type="submit" class="fas fa-times float-right"></button>
@@ -71,7 +72,15 @@
 						<p style="margin:auto; margin-bottom:50px;" class="alert alert-danger text-center">{% trans "your cart is empty" %}</p>
 					{% endif %}
 				</div>
-				<form action="{% url "shop:submit_order" %}" method="POST" class="cartForm mb-5">
+				<form
+					action="
+					{% if settings.CHOOSE_PAYMENT_GATEWAY == 'zarinpal' %}
+						{% url "shop:payment_zarinpal" %}
+					{% endif %}
+					"
+					method="POST"
+					class="cartForm mb-5"
+					>
 					{% csrf_token %}
 					<div class="row mb-10">
 						<div class="col">

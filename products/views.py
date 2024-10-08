@@ -15,6 +15,7 @@ class ProductListView(generic.ListView):
     queryset = Product.objects.all()
     template_name = 'products/product_list.html'
     context_object_name = 'products'
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,7 +31,8 @@ class ProductDetailView(generic.DetailView):
 
     def get_object(self):
         slug = self.kwargs['slug']
-        return Product.objects.prefetch_related('images').get(slug=slug)
+        return Product.objects.prefetch_related('images') \
+            .select_related('category').get(slug=slug)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

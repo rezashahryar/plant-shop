@@ -85,15 +85,21 @@
 							</form>
 							<ul class="list-unstyled socialNetwork d-flex flex-wrap mb-sm-11 mb-4">
 								<li class="text-uppercase mr-5">SHARE THIS PRODUCT:</li>
-								<li class="mr-4"><a href="javascript:void(0);" class="fab fa-facebook-f"></a></li>
-								<li class="mr-4"><a href="javascript:void(0);" class="fab fa-google-plus-g"></a></li>
-								<li class="mr-4"><a href="javascript:void(0);" class="fab fa-twitter"></a></li>
-								<li class="mr-4"><a href="javascript:void(0);" class="fab fa-pinterest-p"></a></li>
+								<li class="mr-4"><a href="#" class="fab fa-facebook-f"></a></li>
+								<li class="mr-4"><a href="#" class="fab fa-google-plus-g"></a></li>
+								<li class="mr-4"><a href="#" class="fab fa-twitter"></a></li>
+								<li class="mr-4"><a href="#" class="fab fa-pinterest-p"></a></li>
 							</ul>
 							<ul class="list-unstyled productInfoDetail mb-0">
-								<li class="mb-2">Categories: <a href="javascript:void(0);">Butter &amp; Eggs,</a> <a href="javascript:void(0);">Fruits,</a> <a href="javascript:void(0);">Milk &amp; Cream,</a> <a href="javascript:void(0);">Vegetables</a></li>
-								<li class="mb-2">Tags: <a href="javascript:void(0);">organic food,</a> <a href="javascript:void(0);">fruits,</a> <a href="javascript:void(0);">juice</a></li>
-								<li>Brand: <a href="javascript:void(0);">KFC</a></li>
+								<li class="mb-2">Categories: 
+									<a href="#">{{ product.category }}</a>
+								</li>
+								<li class="mb-2">Tags: 
+									{% for tag in product.tags.all %}
+										<a href="#">{{ tag.name }},</a>
+									{% endfor %}
+								</li>
+								<li>Brand: <a href="#">KFC</a></li>
 							</ul>
 						</div>
 					</div>

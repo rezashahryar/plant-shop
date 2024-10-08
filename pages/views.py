@@ -4,6 +4,7 @@ from django.conf import settings
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views.decorators.http import require_POST
+from django.utils.translation import gettext_lazy as _
 
 from products.models import Product
 
@@ -46,4 +47,13 @@ def subscribe_newsletter_view(request):
     if form.is_valid():
         form.save()
         messages.success(request, 'your email successfully saved, thanks you')
+    return redirect('pages:home')
+
+
+def change_unit_money(request, unit_money):
+    settings.CHOOSE_UNIT_MONEY = unit_money
+    referer = request.headers['Referer']
+    messages.success(request, _(f'change unit money to {unit_money}'))
+    if referer:
+        return redirect(request.headers['Referer'])
     return redirect('pages:home')

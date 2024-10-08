@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Order
+from .models import Coupon, Order
 
 # create your forms here
 
@@ -18,3 +18,9 @@ class OrderForm(forms.ModelForm):
         fields = [
             'first_name', 'last_name', 'email', 'phone_number', 'address', 'order_note'
         ]
+
+
+class ApplyCouponForm(forms.ModelForm):
+    class Meta:
+        model = Coupon
+        fields = ['code']

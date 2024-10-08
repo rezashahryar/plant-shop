@@ -1,5 +1,8 @@
 {% extends "_base.html" %}
 {% load static %}
+{% load product_tags %}
+{% load humanize %}
+{% load i18n %}
 
 {% block body %}
 		<main>
@@ -8,11 +11,11 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-12 pt-lg-23 pt-md-15 pt-sm-10 pt-6 text-center">
-							<h1 class="headingIV fwEbold playfair mb-4">Shop</h1>
+							<h1 class="headingIV fwEbold playfair mb-4">{% trans "Shop" %}</h1>
 							<ul class="list-unstyled breadCrumbs d-flex justify-content-center">
-								<li class="mr-2"><a href="{% url "pages:home" %}">Home</a></li>
+								<li class="mr-2"><a href="{% url "pages:home" %}">{% trans "Home" %}</a></li>
 								<li class="mr-2">/</li>
-								<li class="active">Shop</li>
+								<li class="active">{% trans "Shop" %}</li>
 							</ul>
 						</div>
 					</div>
@@ -29,7 +32,7 @@
 								<ul class="list-unstyled viewFilterLinks d-flex flex-nowrap align-items-center">
 									<li class="mr-2"><a href="javascript:void(0);" class="active"><i class="fas fa-th-large"></i></a></li>
 									<li class="mr-2"><a href="javascript:void(0);"><i class="fas fa-list"></i></a></li>
-									<li class="mr-2">Showing 1–9 of {{ products.count }} results</li>
+									<li class="mr-2">{% trans "Showing" %} 1–12 {% trans "of" %} {{ products.count }} {% trans "results" %}</li>
 								</ul>
 								<!-- sortGroup -->
 								<div class="sortGroup">
@@ -56,8 +59,16 @@
 												<img style="height:320px;" src="{{ product.cover.url }}" alt="image description" class="img-fluid w-100">
 												<ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
 													<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-heart d-block"></a></li>
-													<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-cart d-block"></a></li>
-													<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-eye d-block"></a></li>
+													<form action="{% url "shop:add_product" product.pk %}" method="POST">
+														{% csrf_token %}
+														<input type="hidden" name="quantity" value="1">
+														<button type="submit">
+															<li class="mr-2 overflow-hidden">
+																<a class="icon-cart d-block"></a>
+															</li>
+														</button>
+													</form>
+													<li class="mr-2 overflow-hidden"><a href="{{ product.get_absolute_url }}" class="icon-eye d-block"></a></li>
 													<li class="overflow-hidden"><a href="javascript:void(0);" class="icon-arrow d-block"></a></li>
 												</ul>
 											</div>
@@ -65,10 +76,10 @@
 												<span class="title d-block mb-2"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></span>
 												<span class="price d-block fwEbold">
 													{% if product.discount %}
-														<del>{{ product.unit_price }} $</del>
-														{{ product.price }} $
+														<del>{% converter_unit_money product.unit_price unit=settings.CHOOSE_UNIT_MONEY %}</del>
+														{% converter_unit_money product.price unit=settings.CHOOSE_UNIT_MONEY %}
 													{% else %}
-														{{ product.price }} $
+														{% converter_unit_money product.price unit=settings.CHOOSE_UNIT_MONEY %}
 													{% endif %}
 												</span>
 												<span class="hotOffer fwEbold text-uppercase text-white position-absolute d-block">HOT</span>
@@ -81,11 +92,35 @@
 								<div class="col-12 pt-3 mb-lg-0 mb-md-6 mb-3">
 									<!-- pagination -->
 									<ul class="list-unstyled pagination d-flex justify-content-center align-items-end">
-										<li><a href="javascript:void(0);"><i class="fas fa-chevron-left"></i></a></li>
-										<li class="active"><a href="javascript:void(0);">1</a></li>
-										<li><a href="javascript:void(0);">2</a></li>
-										<li>...</li>
-										<li><a href="javascript:void(0);"><i class="fas fa-chevron-right"></i></a></li>
+										{% if page_obj.has_previous %}
+											<li>
+												<a href="?page={{ page_obj.previous_page_number }}">
+													<i class="fas fa-chevron-left"></i>
+												</a>
+											</li>
+										{% endif %}
+										
+										{% for i in page_obj.paginator.page_range %}
+											{% if page_obj.number == i %}
+												<li class="active"><a href="#">{{ i }}</a></li>
+											{% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+												<li><a href="?page={{ i }}">{{ i }}</a></li>
+											{% endif %}
+										{% endfor %}
+												
+										{% if page_obj.paginator.num_pages > page_obj.number|add:'2' %}
+											<li>
+												<a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+											</li>
+										{% endif %}
+
+										{% if page_obj.has_next %}
+											<li>
+												<a href="?page={{ page_obj.next_page_number }}">
+													<i class="fas fa-chevron-right"></i>
+												</a>
+											</li>
+										{% endif %}
 									</ul>
 								</div>
 							</div>
@@ -105,7 +140,7 @@
 							</section>
 							<!-- widget -->
 							<section class="widget overflow-hidden mb-9">
-								<h3 class="headingVII fwEbold text-uppercase mb-5">PRODUCT CATEGORIES</h3>
+								<h3 class="headingVII fwEbold text-uppercase mb-5">{% trans "PRODUCT CATEGORIES" %}</h3>
 								<ul class="list-unstyled categoryList mb-0">
 									{% for cat in categories %}
 										<li class="mb-5 overflow-hidden"><a href="{% url "products:product_filter_by_category" cat.slug %}">{{ cat.name }} <span class="num border float-right">{{ cat.product_count }}</span></a></li>
@@ -114,7 +149,7 @@
 							</section>
 							<!-- widget -->
 							<section class="widget mb-9">
-								<h3 class="headingVII fwEbold text-uppercase mb-6">Filter by price</h3>
+								<h3 class="headingVII fwEbold text-uppercase mb-6">{% trans "Filter by price" %}</h3>
 								<!-- filter ranger form -->
 								<form action="{% url "products:search_by_price" %}" method="GET" class="filter-ranger-form">
 									<div id="slider-range"></div>
@@ -128,7 +163,7 @@
 							</section>
 							<!-- widget -->
 							<section class="widget mb-9">
-								<h3 class="headingVII fwEbold text-uppercase mb-6">top rate</h3>
+								<h3 class="headingVII fwEbold text-uppercase mb-6">{% trans "top rate" %}</h3>
 								<ul class="list-unstyled recentListHolder mb-0 overflow-hidden">
 									{% for product in products|slice:":5" %}
 										<li class="mb-6 d-flex flex-nowrap">
@@ -137,7 +172,7 @@
 											</div>
 											<div class="description-wrap pl-1">
 												<h4 class="headingVII mb-1"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>
-												<strong class="price fwEbold d-block;">{{ product.price }} $</strong>
+												<strong class="price fwEbold d-block;">{% converter_unit_money product.price unit=settings.CHOOSE_UNIT_MONEY %}</strong>
 											</div>
 										</li>
 									{% endfor %}
@@ -145,7 +180,7 @@
 							</section>
 							<!-- widget -->
 							<section class="widget mb-9">
-								<h3 class="headingVII fwEbold text-uppercase mb-5">product tags</h3>
+								<h3 class="headingVII fwEbold text-uppercase mb-5">{% trans "product tags" %}</h3>
 								<ul class="list-unstyled tagNavList d-flex flex-wrap mb-0">
 									{% for tag in tags %}
 										<li class="text-center"><a href="{% url "products:product_filter_by_tags" tag.slug %}" class="md-round d-block">{{ tag.name }}</a></li>

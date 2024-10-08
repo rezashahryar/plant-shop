@@ -1,6 +1,5 @@
 from django.urls import path
-
-# from views.payment_views import go_to_gateway_view
+from django.conf import settings
 
 from . import views
 
@@ -15,6 +14,12 @@ urlpatterns = [
     path('remove/<str:unique_id>/', views.RemoveProductFromCart.as_view(), name='remove_product'),
     path('clear/', views.ClearTheCart.as_view(), name='clear_cart'),
     path('submit-order/', views.submit_order_view, name='submit_order'),
-    path('payment/', views.go_to_gateway_view, name='payment'),
-    path('callback-gateway/', views.callback_gateway, name='callback-gateway')
+    path('payment/<int:order_id>', views.pay_payment_gateway, name='payment'),
+    path('callback/', views.callback, name='callback'),
+    path('verify-transaction/<str:token>', views.verify_transaction, name='verify_transaction'),
 ]
+
+if settings.CHOOSE_PAYMENT_GATEWAY == 'zarinpal':
+    urlpatterns += [
+        path('payment/zarinpal/', views.zarinpal_payment, name='payment_zarinpal'),
+    ]

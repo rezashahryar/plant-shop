@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from products.models import Product
+from shop.models import Coupon
 
 class Cart:
     def __init__(self, request):
@@ -7,6 +8,8 @@ class Cart:
         self.session = request.session
 
         cart = self.session.get('cart')
+        # if coupon_id exist return coupon_id if not, return none
+        self.coupon_id = self.session.get('coupon_id')
 
         if not cart:
             cart = self.session['cart'] = {}
@@ -59,3 +62,15 @@ class Cart:
     def clear(self):
         del self.session['cart']
         self.save()
+
+    @property
+    def coupon(self):
+        if self.coupon_id:
+            try:
+                return Coupon.objects.get(id=self.coupon_id)
+            except Coupon.DoesNotExist:
+                pass
+        return None
+    
+    def calculate_discount(self):
+        ...
