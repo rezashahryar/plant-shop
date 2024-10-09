@@ -2,6 +2,7 @@ from typing import Any
 from django.shortcuts import render
 from django.views import generic
 from django.db.models import Count
+from django.core.paginator import Paginator
 
 # from shop.forms import AddToCartProductForm
 
@@ -44,6 +45,7 @@ class ProductDetailView(generic.DetailView):
 class ProductFilterByCategoryListView(generic.ListView):
     template_name = 'products/product_list.html'
     context_object_name = 'products'
+    paginate_by = 12
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -60,6 +62,7 @@ class ProductFilterByCategoryListView(generic.ListView):
 class ProductFilterByTagListView(generic.ListView):
     template_name = 'products/product_list.html'
     context_object_name = 'products'
+    paginate_by = 12
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -76,6 +79,7 @@ class ProductFilterByTagListView(generic.ListView):
 class SearchProductListView(generic.ListView):
     template_name = 'products/product_list.html'
     context_object_name = 'products'
+    paginate_by = 12
 
     def get_queryset(self):
         query_search_param = self.request.GET.get('search')
@@ -88,7 +92,14 @@ def search_by_price_list_view(request):
     if form.is_valid():
         price1 = form.cleaned_data['price1']
         price2 = form.cleaned_data['price2']
-        context['products'] = Product.objects.filter(unit_price__gt=price1, unit_price__lte=price2)
+        products = Product.objects.filter(unit_price__gt=price1, unit_price__lte=price2)
+        context['products'] = products
+
+    paginator = Paginator(products, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context['page_obj'] = page_obj
+
     context['categories'] = CategoryProduct.objects.all() \
             .annotate(product_count=Count('products'))
     context['tags'] = TagProduct.objects.all()
