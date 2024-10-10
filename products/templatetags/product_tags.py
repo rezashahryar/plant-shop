@@ -5,7 +5,7 @@ from django.conf import settings
 
 register = template.Library()
 
-DOLLOR_TO_RIAL = 580000
+DOLLOR_TO_RIAL = settings.DOLLOR_TO_RIAL
 
 
 @register.simple_tag

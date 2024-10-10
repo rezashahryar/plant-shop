@@ -14,12 +14,13 @@ urlpatterns = [
     path('remove/<str:unique_id>/', views.RemoveProductFromCart.as_view(), name='remove_product'),
     path('clear/', views.ClearTheCart.as_view(), name='clear_cart'),
     path('submit-order/', views.submit_order_view, name='submit_order'),
-    path('payment/<int:order_id>', views.pay_payment_gateway, name='payment'),
+    path('apply/coupon/', views.apply_coupon_code, name='apply-coupon'),
     path('callback/', views.callback, name='callback'),
     path('verify-transaction/<str:token>', views.verify_transaction, name='verify_transaction'),
 ]
 
 if settings.CHOOSE_PAYMENT_GATEWAY == 'zarinpal':
     urlpatterns += [
-        path('payment/zarinpal/', views.zarinpal_payment, name='payment_zarinpal'),
+        path('payment/zarinpal/<int:order_id>/', views.zarinpal_payment, name='payment'),
+        path('callback/payment', views.payment_callback_view, name='callback-zarinpal'),
     ]

@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.shortcuts import get_object_or_404
 from products.models import Product
 from shop.models import Coupon
@@ -72,5 +73,10 @@ class Cart:
                 pass
         return None
     
+    def get_amount_discount(self):
+        if self.coupon:
+            return (self.coupon.discount / Decimal(100)) * self.total_price_of_cart()
+        return Decimal(0)
+    
     def calculate_discount(self):
-        ...
+        return self.total_price_of_cart() - self.get_amount_discount()

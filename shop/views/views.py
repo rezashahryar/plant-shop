@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View, generic
 from django.contrib import messages
 from django.views.decorators.http import require_POST
@@ -8,7 +8,7 @@ from django.utils import timezone
 from products.models import Product
 from shop.models import Coupon, OrderItem
 
-from shop.forms import AddToCartProductForm, ApplyCouponForm, OrderForm
+from shop.forms import ApplyCouponForm, OrderForm
 from shop.cart import Cart
 
 # Create your views here.
@@ -97,9 +97,10 @@ def submit_order_view(request):
             item['product_obj'].inventory -= item['quantity']
             item['product_obj'].save()
 
-        return redirect('shop:payment_idpay', order_form_obj.pk)
+        # return redirect('shop:payment_idpay', order_form_obj.pk)
 
-    return redirect('shop:payment')
+        return redirect('shop:payment', order_form_obj.pk)
+    return render(request, 'shop/cart.html', {'order_form': order_form})
 
 
 @require_POST
@@ -115,4 +116,4 @@ def apply_coupon_code(request):
         except Coupon.DoesNotExist:
             request.session['coupon_id'] = None
         
-        return redirect('shop:cart')
+    return redirect('shop:cart')

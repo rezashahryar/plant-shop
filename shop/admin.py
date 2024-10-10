@@ -7,7 +7,7 @@ from .models import Order, OrderItem, Coupon, PeyGatewayTransaction
 
 @admin.register(Coupon)
 class CouponAdmin(admin.ModelAdmin):
-    list_display = ['valid_from', 'valid_until', 'discount', 'active']
+    list_display = ['code', 'valid_from', 'valid_until', 'discount', 'active']
     list_filter = ['valid_from', 'valid_until', 'active']
     search_fields = ['code']
 

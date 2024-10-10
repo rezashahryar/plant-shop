@@ -180,6 +180,8 @@ LOGOUT_REDIRECT_URL = 'pages:home'
 # choose payment gateway
 CHOOSE_PAYMENT_GATEWAY = 'zarinpal' # zarinpal, pay
 
+# dollor to rial
+DOLLOR_TO_RIAL = 600000
 # choose unit money
 CHOOSE_UNIT_MONEY = 'rial' # rial, Us
 

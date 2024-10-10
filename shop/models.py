@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.conf import settings
 
 from products.models import Product
 
@@ -26,7 +27,7 @@ class Order(models.Model):
         # for item in self.items.all():
         #     result += item.price * item.quantity
 
-        return sum(item.price * item.quantity for item in self.items.all())
+        return sum(item.price * item.quantity for item in self.items.all()) * settings.DOLLOR_TO_RIAL
 
 
 class OrderItem(models.Model):
@@ -40,11 +41,21 @@ class Coupon(models.Model):
     code = models.CharField(max_length=10, unique=True)
     valid_from = models.DateTimeField()
     valid_until = models.DateTimeField()
-    discount = models.IntegerField(validators=[MinLengthValidator(1), MaxLengthValidator(100)])
+    discount = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
     active = models.BooleanField(default=True)
+
+    def __str__(self) -> str:
+        return self.code
 
 
 class PeyGatewayTransaction(models.Model):
     # order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='transaction')
     status = models.CharField(max_length=2)
     token = models.CharField(max_length=15)
+
+
+class ZarinpalGatewayTransaction(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='transaction')
+    authority = models.CharField(max_length=255, blank=True)
+    ref_id = models.CharField(max_length=255, null=True, blank=True)
+    zarinpal_data = models.TextField(null=True, blank=True)

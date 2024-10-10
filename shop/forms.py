@@ -19,8 +19,16 @@ class OrderForm(forms.ModelForm):
             'first_name', 'last_name', 'email', 'phone_number', 'address', 'order_note'
         ]
 
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+        if len(first_name) > 2:
+            raise forms.ValidationError('این فیلد اجباری است')
 
-class ApplyCouponForm(forms.ModelForm):
-    class Meta:
-        model = Coupon
-        fields = ['code']
+        return first_name
+
+
+class ApplyCouponForm(forms.Form):
+    code = forms.CharField()
+    # class Meta:
+    #     model = Coupon
+    #     fields = ['code']
