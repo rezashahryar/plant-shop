@@ -3,6 +3,10 @@
 {% load blog_tags %}
 {% load i18n %}
 
+{% block title %}
+	{{ post.title }}
+{% endblock title %}
+
 {% block body %}
 <main>
 	<!-- introBannerHolder -->

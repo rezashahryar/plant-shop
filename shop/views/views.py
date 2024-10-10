@@ -97,6 +97,8 @@ def submit_order_view(request):
             item['product_obj'].inventory -= item['quantity']
             item['product_obj'].save()
 
+        cart.clear()
+
         # return redirect('shop:payment_idpay', order_form_obj.pk)
 
         return redirect('shop:payment', order_form_obj.pk)

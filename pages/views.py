@@ -21,7 +21,9 @@ class HomePageView(generic.TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.all()[:10]
+        context['products'] = Product.objects.all()[:4]
+        if settings.HOME_PAGE == 'home3':
+            context['products'] = Product.objects.all()[:10]
 
         return context
     

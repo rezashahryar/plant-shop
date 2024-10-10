@@ -166,7 +166,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 #choose home page
-HOME_PAGE = 'home1'  # values: home1, home2, home3
+HOME_PAGE = 'home2'  # values: home1, home2, home3
 
 # django debug toolbar
 INTERNAL_IPS = [

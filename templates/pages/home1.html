@@ -12,7 +12,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- set the page title -->
-	<title>Botanical - HTML5 Ecommerce Template</title>
+	<title>Home</title>
 	<!-- include the site Google Fonts stylesheet -->
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:300,400,500,700,900&display=swap" rel="stylesheet">
 	<!-- include the site bootstrap stylesheet -->
@@ -279,14 +279,22 @@
 									<img style="height:320px;" src="{{ product.cover.url }}" alt="image description" class="img-fluid w-100">
 									<ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
 										<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-heart d-block"></a></li>
-										<li class="mr-2 overflow-hidden"><a href="javascript:void(0);" class="icon-cart d-block"></a></li>
+										<form action="{% url "shop:add_product" product.pk %}" method="POST">
+											{% csrf_token %}
+											<input type="hidden" name="quantity" value="1">
+											<button type="submit">
+												<li class="mr-2 overflow-hidden">
+													<a class="icon-cart d-block"></a>
+												</li>
+											</button>
+										</form>
 										<li class="mr-2 overflow-hidden"><a href="{{ product.get_absolute_url }}" class="icon-eye d-block"></a></li>
 										<li class="overflow-hidden"><a href="javascript:void(0);" class="icon-arrow d-block"></a></li>
 									</ul>
 								</div>
 								<div class="text-center py-xl-5 py-sm-4 py-2 px-xl-2 px-1">
 									<span class="title d-block mb-2"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></span>
-									<span class="price d-block fwEbold">{% converter_unit_money product.price unit=settings.CHOOSE_UNIT_MONEY|intcomma %}</span>
+									<span class="price d-block fwEbold">{% converter_unit_money product.price unit=settings.CHOOSE_UNIT_MONEY %}</span>
 								</div>
 							</div>
 						</div>
