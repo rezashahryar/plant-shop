@@ -122,7 +122,7 @@
 					<!-- mainHeader -->
 					<header class="col-12 mainHeader mb-4 text-center">
 						<h1 class="headingIV playfair fwEblod mb-4">{% trans "New Arrival" %}</h1>
-						<span class="headerBorder d-block mb-5"><img src="images/hbdr.png" alt="Header Border" class="img-fluid img-bdr"></span>
+						<span class="headerBorder d-block mb-5"><img src="{% static "images/hbdr.png" %}" alt="Header Border" class="img-fluid img-bdr"></span>
 						<p>{% trans "There are many variations of passages of lorem ipsum available" %} </p>
 					</header>
 				</div>
@@ -169,7 +169,7 @@
 								<img src="{% static "images/img21.jpg" %}" alt="image description" class="img-fluid w-100">
 								<div class="hoverTextBlock position-absolute">
 									<h2 class="headingIV playfair fwEbold mb-3"><a href="javascript:void(0);">Cactus Plant</a></h2>
-									<span class="txt d-block">( 56 item )</span>
+									<span class="txt d-block">( 56 {% trans "item" %} )</span>
 								</div>
 							</div>
 						</div>
@@ -273,7 +273,6 @@
 						</div>
 					{% endfor %}
 					<!-- featureCol -->
-					
 				</div>
 			</section>
 			<div class="container-fluid px-xl-20 px-lg-10">

@@ -21,6 +21,6 @@ urlpatterns = [
 
 if settings.CHOOSE_PAYMENT_GATEWAY == 'zarinpal':
     urlpatterns += [
-        path('payment/zarinpal/<int:order_id>/', views.zarinpal_payment, name='payment'),
+        path('payment/zarinpal/', views.zarinpal_payment, name='payment'),
         path('callback/payment', views.payment_callback_view, name='callback-zarinpal'),
     ]

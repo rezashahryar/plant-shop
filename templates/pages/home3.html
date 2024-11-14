@@ -81,7 +81,7 @@
 					<!-- wishList -->
 					<ul class="nav nav-tabs wishList pt-md-5 pt-sm-4 mr-md-3 justify-content-end border-bottom-0 dis-none">
 						{% comment %} <li class="nav-item"><a class="nav-link position-relative icon-heart" href="javascript:void(0);"><span class="num rounded d-block">1</span></a></li> {% endcomment %}
-						<li class="nav-item"><a class="nav-link position-relative icon-cart" href="javascript:void(0);"><span class="num rounded d-block">{{ cart|length }}</span></a></li>
+						<li class="nav-item"><a class="nav-link position-relative icon-cart" href="{% url "shop:cart" %}"><span class="num rounded d-block">{{ cart|length }}</span></a></li>
 					</ul>
 				</div>
 			</div>

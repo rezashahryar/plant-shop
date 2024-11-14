@@ -1,17 +1,17 @@
-from django.http import HttpResponse
 import requests
 
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect
-from django.contrib.sites.shortcuts import get_current_site
+from django.http import HttpResponse
 
 from shop.models import Order, ZarinpalGatewayTransaction
 
 
-def zarinpal_payment(request, order_id):
+def zarinpal_payment(request):
+    order_id = request.session.get('order_id')
     order_obj = get_object_or_404(Order, id=order_id)
 
-    request.session['order_id'] = order_id
+    # request.session['order_id'] = order_id
     
     payload = {
         'merchant_id': '111111111111111111111111111111111111',
@@ -54,9 +54,6 @@ def payment_callback_view(request):
         url='https://sandbox.zarinpal.com/pg/v4/payment/verify.json',
         data=payload,
     )
-
-    print('=' * 40)
-    print(res.json())
 
     if 'data' in res.json() and ('errors' not in res.json()['data'] or len(res.json()['data']['errors']) == 0):
         data = res.json()['data']

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Coupon, Order
+from .models import Order
 
 # create your forms here
 
@@ -19,16 +19,12 @@ class OrderForm(forms.ModelForm):
             'first_name', 'last_name', 'email', 'phone_number', 'address', 'order_note'
         ]
 
-    def clean_first_name(self):
-        first_name = self.cleaned_data['first_name']
-        if len(first_name) > 2:
-            raise forms.ValidationError('این فیلد اجباری است')
-
-        return first_name
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+        if not phone_number.isdigit():
+            raise forms.ValidationError('شماره تلفن تماما باید عددی باشد')
+        return phone_number
 
 
 class ApplyCouponForm(forms.Form):
     code = forms.CharField()
-    # class Meta:
-    #     model = Coupon
-    #     fields = ['code']
